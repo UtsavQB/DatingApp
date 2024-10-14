@@ -15,6 +15,8 @@ const LoginPage = () => {
     console.log('Login Data:', data);
   };
 
+  console.log('check')
+
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-400 to-purple-500">
       <form onSubmit={handleSubmit(onSubmit)} className="p-8 bg-opacity-70 bg-white/50 rounded-lg shadow-lg w-96 z-10">
