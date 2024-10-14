@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
@@ -61,7 +60,7 @@ const fetchData = async (formData) => {
           Register
         </h2>
 
-        <div className="mb-6 flex items-center">
+        {/* <div className="mb-6 flex items-center">
           <label className="block text-gray-700 w-24 mr-2" htmlFor="firstName">
             First Name:
           </label>
@@ -89,9 +88,9 @@ const fetchData = async (formData) => {
               </p>
             )}
           </div>
-        </div>
+        </div> */}
 
-        <div className="mb-6 flex items-center">
+        {/* <div className="mb-6 flex items-center">
           <label className="block text-gray-700 w-24 mr-2" htmlFor="lastName">
             Last Name:
           </label>
@@ -119,7 +118,7 @@ const fetchData = async (formData) => {
               </p>
             )}
           </div>
-        </div>
+        </div> */}
 
         <div className="mb-6 flex items-center">
           <label className="block text-gray-700 w-24 mr-2" htmlFor="username">
@@ -238,7 +237,7 @@ const fetchData = async (formData) => {
           </div>
         </div>
 
-        <div className="mb-6 flex items-center">
+        {/* <div className="mb-6 flex items-center">
           <label className="block text-gray-700 w-24 mr-2" htmlFor="phoneNumber">
           phone Number:
           </label>
@@ -264,7 +263,7 @@ const fetchData = async (formData) => {
               </p>
             )}
           </div>
-        </div>
+        </div> */}
 
 
         <button

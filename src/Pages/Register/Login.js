@@ -19,13 +19,13 @@ const LoginPage = () => {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-400 to-purple-500">
-      <form onSubmit={handleSubmit(onSubmit)} className="p-8 bg-opacity-70 bg-white/50 rounded-lg shadow-lg w-96 z-10">
+      <form onSubmit={handleSubmit(onSubmit)} className="p-8 bg-opacity-70 bg-white/50 rounded-lg shadow-lg w-1/4 z-10">
         <h2 className="text-4xl font-semibold mb-6 text-center text-gray-800">Welcome Back!</h2>
         <p className="text-center text-gray-600 mb-4">Find your match and start your love story.</p>
 
         <div className="mb-6 flex items-center">
           <label className="block text-gray-700 w-24" htmlFor="email">
-            Email:
+          Email / Username:
           </label>
           <div className="flex-1">
             <div className="flex items-center border rounded-lg overflow-hidden">
@@ -43,7 +43,7 @@ const LoginPage = () => {
                 className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
                   errors.email ? 'border-red-500 focus:ring-red-300' : 'focus:ring-pink-200'
                 }`}
-                placeholder="example@mail.com"
+                placeholder="Enter your email or username"
                 id="email"
               />
             </div>

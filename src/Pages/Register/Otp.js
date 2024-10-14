@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Navigate, useNavigate } from "react-router-dom";
 
 const OTPVerification = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(600);
 
   useEffect(() => {
     if (timer > 0) {
@@ -34,11 +35,38 @@ const OTPVerification = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const otpValue = otp.join('');
     console.log('Submitted OTP:', otpValue);
-  };
+    await fetchData({ email:'check2@yopmail.com',otp: otpValue });  };
+
+  const fetchData = async (formData) =>{
+    try {
+      const response = await fetch(
+         `${process.env.REACT_APP_API_BASE_URL}/api/otp/verify`,
+         {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(formData),
+    
+         }
+      )
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const result = await response.json();
+    console.log(result, "Response Data");
+    Navigate('/login')
+
+
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-400 to-purple-500">
