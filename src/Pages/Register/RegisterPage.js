@@ -40,7 +40,9 @@ const fetchData = async (formData) => {
 
         const result = await response.json();
         console.log(result, "Response Data");
-        navigate("/Otp")
+console.log(formData.email,"formData.email");
+
+        navigate("/Otp",{state:{email:formData.email}})
 
     } catch (error) {
         console.error("Error:", error);

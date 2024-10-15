@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate,useLocation, useNavigate } from "react-router-dom";
 
 const OTPVerification = () => {
+  const location = useLocation();
+  // const navigate = useNavigate();
+
+  // Access email from location state
+  const email = location.state?.email || ''; // Get email from state (empty string as fallback)
+  
   const [otp, setOtp] = useState(['', '', '', '']);
-  const [timer, setTimer] = useState(600);
+  const [timer, setTimer] = useState(60);
+  // const [email, setEmail] = useState('');
 
   useEffect(() => {
     if (timer > 0) {
@@ -34,14 +41,19 @@ const OTPVerification = () => {
       document.getElementById(`otp-input-${index - 1}`).focus();
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const otpValue = otp.join('');
+    const otpValue = otp.join("");
     console.log('Submitted OTP:', otpValue);
-    await fetchData({ email:'check2@yopmail.com',otp: otpValue });  };
+    // console.log('Email:', email);
+    await fetchData({otp: otpValue });  };
 
   const fetchData = async (formData) =>{
+    console.log("otp page data",email,formData)
+    const finalData = {
+      email:email,
+      otp:formData.otp
+    }
     try {
       const response = await fetch(
          `${process.env.REACT_APP_API_BASE_URL}/api/otp/verify`,
@@ -51,7 +63,7 @@ const OTPVerification = () => {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(finalData),
     
          }
       )
@@ -60,7 +72,7 @@ const OTPVerification = () => {
     }
     const result = await response.json();
     console.log(result, "Response Data");
-    Navigate('/login')
+    Navigate('/Login')
 
 
     } catch (error) {
