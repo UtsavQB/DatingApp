@@ -1,8 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { FiUser, FiMail, FiLock } from "react-icons/fi";
+import { FiMail, FiLock } from "react-icons/fi";
 import couplesvg from "../../Assets/Icon/couple.svg";
+import Landsvg from "../../Assets/Icon/Land.svg";
+import Buildings from "../../Assets/Icon/Buidings.svg";
+import Flower from "../../Assets/Icon/Flower.svg";
+import Flower2 from "../../Assets/Icon/Flower2.svg";
+import Flower3 from "../../Assets/Icon/Flower3.svg";
+
 const New = () => {
   const {
     register,
@@ -19,9 +25,23 @@ const New = () => {
     <>
       <div className="min-h-screen bg-pink-100 flex items-center justify-center">
         <div className="hidden md:flex md:w-1/2 items-center justify-center">
-          <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-            {/* Email Icon */}
+          <span className="absolute left-48 bottom-10 z-20 flex items-center pl-3">
             <img src={couplesvg} alt="hello" />
+          </span>
+          <span className="absolute left-0 bottom-0 z-10 flex items-center pl-3">
+            <img src={Landsvg} alt="hello" />
+          </span>
+          <span className="absolute left-0 bottom-7 z-0 flex items-center pl-3">
+            <img src={Buildings} alt="hello" />
+          </span>
+          <span className="absolute left-0 top-0 flex items-center pl-3">
+            <img src={Flower} alt="hello" />
+          </span>
+          <span className="absolute end-0 top-0 flex items-center pl-3">
+            <img src={Flower2} alt="hello" />
+          </span>
+          <span className="absolute end-0 bottom-0 flex items-center pl-3">
+            <img src={Flower3} alt="hello" />
           </span>
         </div>
         {/* Main Container */}
@@ -37,7 +57,7 @@ const New = () => {
           {/* Login Form */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
+              <label className="block text-gray-700">Email or Username</label>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   {/* Email Icon */}
@@ -45,9 +65,9 @@ const New = () => {
                 </span>
                 <input
                   type="email"
-                  placeholder="thisuix@mail.com"
+                  placeholder="thisuix@mail.com or Username"
                   {...register("email", {
-                    required: "Email is required",
+                    required: "Email or Username is required",
                     pattern: {
                       value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                       message: "Invalid email address",
