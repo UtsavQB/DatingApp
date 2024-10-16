@@ -10,7 +10,6 @@ const OTPVerification = () => {
   
   const [otp, setOtp] = useState(['', '', '', '']);
   const [timer, setTimer] = useState(60);
-  // const [email, setEmail] = useState('');
 
   useEffect(() => {
     if (timer > 0) {
