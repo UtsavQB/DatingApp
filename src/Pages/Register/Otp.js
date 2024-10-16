@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 const OTPVerification = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
-  const [timer, setTimer] = useState(600);
+  const [timer, setTimer] = useState(60);
 
   useEffect(() => {
     if (timer > 0) {

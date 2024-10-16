@@ -6,6 +6,7 @@ import Input from "../components/UIComponent/input";
 import LoginPage from "../Pages/Register/Login";
 import New from "../Pages/Register/New";
 import Home from "../Pages/Home";
+import Profile from "../Pages/Profile/Profile";
 
 const Routing = () => {
   return (
@@ -17,6 +18,7 @@ const Routing = () => {
         <Route exact path="Login" element={<LoginPage />}></Route>
         <Route exact path="new" element={<New />}></Route>
         <Route exact path="Home" element={<Home />}></Route>
+        <Route exact path="profile" element={<Profile />}></Route>
 
       </Routes>
     </BrowserRouter>
