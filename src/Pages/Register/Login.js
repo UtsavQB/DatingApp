@@ -1,21 +1,57 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiMail, FiLock } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Await, Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    console.log(data, 'data')
     console.log('Login Data:', data);
+    await fetchData({loginInput:data.email, password:data.password});
   };
+  // console.log('check')
 
-  console.log('check')
+const fetchData = async (data) =>{
+  console.log(data,"data fetch data")
+try {
+  const response = await fetch( `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log(result, "Response Data");
+      console.log(data.email, "formData.email");
+      navigate("/profile");
+
+
+} catch (error) {
+  console.error("Error:", error);
+}
+
+
+
+}  
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-400 to-purple-500">

@@ -1,5 +1,6 @@
-import React from "react";
+import {React, useState} from "react";
 import { useForm } from "react-hook-form";
+  
 import { Link } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
 import couplesvg from "../../Assets/Icon/couple.svg";
@@ -8,19 +9,76 @@ import Buildings from "../../Assets/Icon/Buidings.svg";
 import Flower from "../../Assets/Icon/Flower.svg";
 import Flower2 from "../../Assets/Icon/Flower2.svg";
 import Flower3 from "../../Assets/Icon/Flower3.svg";
-import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
-
+import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { Snackbar } from "@mui/material";
 
 const New = () => {
+  const [message, setMessage] = useState("");
+  console.log("message", message);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Handle login logic here
+  const onSubmit = async (data) => {
+    console.log(data, "data");
+    console.log("Login Data:", data);
+    await fetchData({ loginInput: data.email, password: data.password });
+  };
+
+  const fetchData = async (data) => {
+    console.log(data, "data fetch data");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log(result, "Response Data");
+      setMessage(result.message);
+      console.log(data.email, "formData.email");
+      setState({ open: true });
+      setTimeout(() => {
+        navigate("/profile");
+      }, 2000);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const {
+    mutate,
+    isSuccess,
+    isError,
+    error,
+    data: Updated_response,
+    isLoading,
+  } = useForm();
+  const [state, setState] = useState({
+    open: false,
+  });
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
   };
 
   return (
@@ -65,67 +123,72 @@ const New = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Email Field */}
             <div className="mb-6 flex items-center">
-          <label className="block text-gray-700 w-24 mr-2" htmlFor="email">
-            Email / Username:
-          </label>
-          <div className="flex-1">
-            <div className="flex items-center border rounded-lg overflow-hidden">
-              <span className="p-3 text-black rounded-md h-12">
-                <FiMail className="mt-1" />
-              </span>
-              <input
-                {...register("email", {
-                  required: "Email is required.",
-                  pattern: {
-                    value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                    message: "Please enter a valid email address.",
-                  },
-                })}
-                id="email"
-                className={`border-0 flex-1 py-3 w-full px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                  errors.email
-                    ? "border-red-500 focus:ring-red-300"
-                    : "focus:ring-pink-200"
-                }`}
-                placeholder="example@mail.com or Username"
-              />
+              <label className="block text-gray-700 w-24 mr-2" htmlFor="email">
+                Email / Username:
+              </label>
+              <div className="flex-1">
+                <div className="flex items-center border rounded-lg overflow-hidden">
+                  <span className="p-3 text-black rounded-md h-12">
+                    <FiMail className="mt-1" />
+                  </span>
+                  <input
+                    {...register("email", {
+                      required: "Email is required.",
+                      pattern: {
+                        value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                        message: "Please enter a valid email address.",
+                      },
+                    })}
+                    id="email"
+                    className={`border-0 flex-1 py-3 w-full px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                      errors.email
+                        ? "border-red-500 focus:ring-red-300"
+                        : "focus:ring-pink-200"
+                    }`}
+                    placeholder="example@mail.com or Username"
+                  />
+                </div>
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
             </div>
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-        </div>
 
             {/* Password Field */}
             <div className="mb-6 flex items-center">
-          <label className="block text-gray-700 w-24 mr-2" htmlFor="password">
-            Password:
-          </label>
-          <div className="flex-1">
-            <div className="flex items-center border rounded-lg overflow-hidden">
-              <span className="p-3 text-black rounded-md h-12">
-                <FiLock className="mt-1" />
-              </span>
-              <input
-                {...register("password", { required: "Password is required." })}
-                id="password"
-                className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                  errors.password
-                    ? "border-red-500 focus:ring-red-300"
-                    : "focus:ring-pink-200"
-                }`}
-                placeholder="********"
-              />
+              <label
+                className="block text-gray-700 w-24 mr-2"
+                htmlFor="password"
+              >
+                Password:
+              </label>
+              <div className="flex-1">
+                <div className="flex items-center border rounded-lg overflow-hidden">
+                  <span className="p-3 text-black rounded-md h-12">
+                    <FiLock className="mt-1" />
+                  </span>
+                  <input
+                    {...register("password", {
+                      required: "Password is required.",
+                    })}
+                    id="password"
+                    className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                      errors.password
+                        ? "border-red-500 focus:ring-red-300"
+                        : "focus:ring-pink-200"
+                    }`}
+                    placeholder="********"
+                  />
+                </div>
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
             </div>
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-        </div>
 
             <div className="text-right mb-6">
               <Link to="/" className="text-sm text-pink-500 hover:underline">
@@ -143,21 +206,20 @@ const New = () => {
 
           {/* Social Media Login */}
 
-<div className="mt-8">
-  <div className="text-center text-gray-500 text-sm mb-4">OR</div>
-  <div className="flex justify-between">
-    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
-      <FaGoogle className="mr-2" /> Google
-    </button>
-    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
-      <FaFacebook className="mr-2" /> Facebook
-    </button>
-    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
-      <FaApple className="mr-2" /> Apple
-    </button>
-  </div>
-</div>
-
+          <div className="mt-8">
+            <div className="text-center text-gray-500 text-sm mb-4">OR</div>
+            <div className="flex justify-between">
+              <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
+                <FaGoogle className="mr-2" /> Google
+              </button>
+              <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
+                <FaFacebook className="mr-2" /> Facebook
+              </button>
+              <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
+                <FaApple className="mr-2" /> Apple
+              </button>
+            </div>
+          </div>
 
           {/* Register Section */}
           <div className="text-center mt-8">
@@ -170,6 +232,16 @@ const New = () => {
           </div>
         </div>
       </div>
+
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={state.open}
+        onClose={handleClose}
+        TransitionComponent={state.Transition}
+        message={error?.response?.data?.message || message}
+        key={state?.Transition?.name}
+        autoHideDuration={3000}
+      />
     </>
   );
 };

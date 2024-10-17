@@ -15,8 +15,8 @@ const Routing = () => {
         <Route exact path="/" element={<Index />}></Route>
         <Route exact path="Otp" element={<OTPVerification />}></Route>
         <Route exact path="Input" element={<Input />}></Route>
-        <Route exact path="Login" element={<LoginPage />}></Route>
-        <Route exact path="new" element={<New />}></Route>
+        {/* <Route exact path="Login" element={<LoginPage />}></Route> */}
+        <Route exact path="Login" element={<New />}></Route>
         <Route exact path="Home" element={<Home />}></Route>
         <Route exact path="profile" element={<Profile />}></Route>
 
