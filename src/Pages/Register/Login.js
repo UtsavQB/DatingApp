@@ -1,16 +1,6 @@
-<<<<<<< Updated upstream
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { FiMail, FiLock } from 'react-icons/fi';
-import { Await, Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-
-const LoginPage = () => {
-  const navigate = useNavigate();
-=======
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
 import couplesvg from "../../Assets/Icon/couple.svg";
 import Landsvg from "../../Assets/Icon/Land.svg";
@@ -22,27 +12,20 @@ import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 
 
 const Login = () => {
->>>>>>> Stashed changes
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-<<<<<<< Updated upstream
   const onSubmit = async (data) => {
     console.log(data, 'data')
     console.log('Login Data:', data);
     await fetchData({loginInput:data.email, password:data.password});
-=======
-  const onSubmit = (data) => {
-    console.log(data);
-    // Handle login logic here
->>>>>>> Stashed changes
   };
   // console.log('check')
 
-<<<<<<< Updated upstream
 const fetchData = async (data) =>{
   console.log(data,"data fetch data")
 try {
@@ -77,8 +60,6 @@ try {
 
 }  
 
-=======
->>>>>>> Stashed changes
   return (
     <>
       <div className="min-h-screen bg-pink-100 flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative">
