@@ -94,7 +94,7 @@ console.log(errors,"errors")
       }
       const result = await response.json();
       console.log(result, "Response Data");
-      navigate("/login");
+      navigate("/profile");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -158,7 +158,7 @@ console.log(errors,"errors")
     </span>
     </div>
       
-      <form onSubmit={handleSubmit} 
+      <form onSubmit={handleSubmit(onSubmit)} 
       className="bg-white/50 p-8 bg-opacity-70 rounded-lg shadow-lg w-96 hover:scale-105 transition-transform transform z-10"
       >
       
