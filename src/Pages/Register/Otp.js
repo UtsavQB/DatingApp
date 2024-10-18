@@ -2,6 +2,14 @@ import React, { useState, useEffect } from "react";
 // import { Snackbar  } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import couplesvg from "../../Assets/Icon/couple.svg";
+import Landsvg from "../../Assets/Icon/Land.svg";
+import Buildings from "../../Assets/Icon/Buidings.svg";
+import Flower from "../../Assets/Icon/Flower.svg";
+import Flower2 from "../../Assets/Icon/Flower2.svg";
+import Flower3 from "../../Assets/Icon/Flower3.svg";
+import Frame from "../../Assets/Icon/Frame.svg";
+
 
 const OTPVerification = () => {
   const location = useLocation();
@@ -119,15 +127,42 @@ console.log(errors,"errors")
     }
   };
   return (
-    <>
-    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-400 to-purple-500">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="bg-white/50 p-8 bg-opacity-70 rounded-lg shadow-lg w-96 hover:scale-105 transition-transform transform z-10"
+    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r bg-pink-100">
+      <div className="hidden md:flex md:w-1/2 items-center justify-center w-full">
+
+<span className="absolute left-0 bottom-0 z-10 flex items-center pl-0">
+      <img src={Landsvg} alt="land" className="h-auto w-full" />
+    </span>
+    <span className="absolute left-0 bottom-7 z-0 flex items-center sm:bottom-6 md:bottom-5 lg:bottom-4 xl:bottom-3">
+      <img src={Buildings} alt="buildings" className="h-auto w-full" />
+    </span>
+    <span className="absolute left-0 top-0 flex items-center">
+      <img src={Flower} alt="flower" className="h-auto w-full" />
+    </span>
+    <span className="absolute right-0 top-0 flex items-center">
+      <img src={Flower2} alt="flower2" className="h-auto w-full" />
+    </span>
+    <span className="absolute right-0 bottom-0 flex items-center">
+      <img src={Flower3} alt="flower3" className="h-auto w-full" />
+    </span>
+    <span className="absolute top-20  flex item-center">
+      <img src={Frame} alt="Frame" className="animate-bounce"/>
+      
+    </span>
+    <span className="absolute left-4 md:left-12 lg:left-48 bottom-4 md:bottom-6 lg:bottom-10 z-20 flex items-center pl-2 sm:left-4 xl:left-48 sm:bottom-4 xl:bottom-10 sm:pl-3">
+      <img
+        src={couplesvg}
+        alt="couple"
+        className="h-auto md:h-96 lg:h-96 xl:h-[450px] 2xl:h-[600px] w-full"
+      />
+    </span>
+    </div>
+      
+      <form onSubmit={handleSubmit} 
+      className="bg-white/50 p-8 bg-opacity-70 rounded-lg shadow-lg w-96 hover:scale-105 transition-transform transform z-10"
       >
-        <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">
-          Enter OTP
-        </h2>
+      
+        <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">Enter OTP</h2>
 
         <div className="flex justify-center mb-4">
           {otp.map((digit, index) => (
@@ -176,8 +211,7 @@ console.log(errors,"errors")
 
 
     </div>
-   
-            </>
+  
   );
 };
 

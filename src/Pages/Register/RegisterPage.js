@@ -5,6 +5,13 @@
   import { useNavigate } from "react-router-dom";
   // import { useUpdateSingle } from '../../hooks/Api';
   import { Snackbar } from '@mui/material';
+import couplesvg from "../../Assets/Icon/couple.svg";
+import Landsvg from "../../Assets/Icon/Land.svg";
+import Buildings from "../../Assets/Icon/Buidings.svg";
+import Flower from "../../Assets/Icon/Flower.svg";
+import Flower2 from "../../Assets/Icon/Flower2.svg";
+import Flower3 from "../../Assets/Icon/Flower3.svg";
+import Frame from "../../Assets/Icon/Frame.svg";
 
 
   const RegisterPage = () => {
@@ -67,256 +74,183 @@
       });
   };
 
-    return (
-      <>
-      <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-400 to-purple-500">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="p-8 bg-opacity-70 bg-white/50 rounded-lg shadow-lg w-96 z-10 hover:scale-105 transition-transform transform"
-        >
-          <h2 className="text-4xl font-semibold mb-6 text-center text-gray-800">
-            Register
-          </h2>
+  return (
+    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r bg-pink-100">
+              <div className="hidden md:flex md:w-1/2 items-center justify-center w-full">
 
-          {/* <div className="mb-6 flex items-center">
-            <label className="block text-gray-700 w-24 mr-2" htmlFor="firstName">
-              First Name:
-            </label>
-            <div className="flex-1">
-              <div className="flex items-center border rounded-lg overflow-hidden">
-                <span className="p-3 bg-pink-500 text-white rounded-md h-12">
-                  <FiUser className="mt-1" />
-                </span>
-                <input
-                  {...register("userFirstName", {
-                    required: "First name is required.",
-                  })}
-                  id="userFirstName"
-                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.firstName
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
-                  placeholder="First Name"
-                />
-              </div>
-              {errors.firstName && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.firstName.message}
-                </p>
-              )}
-            </div>
-          </div> */}
-
-          {/* <div className="mb-6 flex items-center">
-            <label className="block text-gray-700 w-24 mr-2" htmlFor="lastName">
-              Last Name:
-            </label>
-            <div className="flex-1">
-              <div className="flex items-center border rounded-lg overflow-hidden">
-                <span className="p-3 bg-pink-500 text-white rounded-md h-12">
-                  <FiUser className="mt-1" />
-                </span>
-                <input
-                  {...register("userLastName", {
-                    required: "Last name is required.",
-                  })}
-                  id="userLastName"
-                  className={`border-0 flex-1 py-3 w-full px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.lastName
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
-                  placeholder="Last Name"
-                />
-              </div>
-              {errors.lastName && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.lastName.message}
-                </p>
-              )}
-            </div>
-          </div> */}
-
-          <div className="mb-6 flex items-center">
-            <label className="block text-gray-700 w-24 mr-2" htmlFor="username">
-              Username:
-            </label>
-            <div className="flex-1 ">
-              <div className="flex  items-center border rounded-lg overflow-hidden">
-                <span className="p-3 bg-pink-500  text-white rounded-md h-12">
-                  <FiUser className="mt-1 " />
-                </span>
-                <input
-                  {...register("username", { required: "Username is required." })}
-                  id="username"
-                  className={`border-0  flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.username
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
-                  placeholder="Username"
-                />
-              </div>
-              {errors.username && (
-                <p className= " text-red-500 text-sm mt-1 text-start ">
-                  {errors.username.message}
-                </p>
-              )}
-            </div>
+      <span className="absolute left-0 bottom-0 z-10 flex items-center pl-0">
+            <img src={Landsvg} alt="land" className="h-auto w-full" />
+          </span>
+          <span className="absolute left-0 bottom-7 z-0 flex items-center sm:bottom-6 md:bottom-5 lg:bottom-4 xl:bottom-3">
+            <img src={Buildings} alt="buildings" className="h-auto w-full" />
+          </span>
+          <span className="absolute left-0 top-0 flex items-center">
+            <img src={Flower} alt="flower" className="h-auto w-full" />
+          </span>
+          <span className="absolute right-0 top-0 flex items-center">
+            <img src={Flower2} alt="flower2" className="h-auto w-full" />
+          </span>
+          <span className="absolute right-0 bottom-0 flex items-center">
+            <img src={Flower3} alt="flower3" className="h-auto w-full" />
+          </span>
+          <span className="absolute top-20  flex item-center">
+            <img src={Frame} alt="Frame" className="animate-bounce"/>
+          </span>
+          <span className="absolute left-4 md:left-12 lg:left-48 bottom-4 md:bottom-6 lg:bottom-10 z-20 flex items-center pl-2 sm:left-4 xl:left-48 sm:bottom-4 xl:bottom-10 sm:pl-3">
+            <img
+              src={couplesvg}
+              alt="couple"
+              className="h-auto md:h-96 lg:h-96 xl:h-[450px] 2xl:h-[600px] w-full"
+            />
+          </span>
           </div>
 
-          <div className="mb-6 flex items-center">
-            <label className="block text-gray-700 w-24 mr-2" htmlFor="email">
-              Email:
-            </label>
-            <div className="flex-1">
-              <div className="flex items-center border rounded-lg overflow-hidden">
-                <span className="p-3 bg-pink-500 text-white rounded-md h-12">
-                  <FiMail className="mt-1" />
-                </span>
-                <input
-                  {...register("email", {
-                    required: "Email is required.",
-                    pattern: {
-                      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: "Please enter a valid email address.",
-                    },
-                  })}
-                  id="email"
-                  className={`border-0 flex-1 py-3 w-full px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.email
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
-                  placeholder="example@mail.com"
-                />
-              </div>
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1 text-start">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="mb-6 flex items-center">
-            <label className="block text-gray-700 w-24 mr-2" htmlFor="password">
-              Password:
-            </label>
-            <div className="flex-1">
-              <div className="flex items-center border rounded-lg overflow-hidden">
-                <span className="p-3 bg-pink-500 text-white rounded-md h-12">
-                  <FiLock className="mt-1" />
-                </span>
-                <input
-                  {...register("password", { required: "Password is required." })}
-                  id="password"
-                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.password
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
-                  placeholder="********"
-                />
-              </div>
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1 text-start">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-          </div>
-
+          <div className="z-20 items-center justify-center md:flex md:w-1/2">
           
-          <div className="mb-6 flex items-center">
-            <label
-              className="block text-gray-700 w-24 mr-2"
-              htmlFor="confirmPassword"
-            >
-              Confirm Password:
-            </label>
-            <div className="flex-1">
-              <div className="flex items-center  border rounded-lg overflow-hidden">
-                <span className="p-3 bg-pink-500 text-white rounded-md h-12">
-                  <FiLock className="mt-1 " />
-                </span>
-                <input
-                  {...register("confirmPassword", {
-                    required: "Confirm Password is required.",
-                  })}
-                  id="confirmPassword"
-                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.confirmPassword
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
-                  placeholder="********"
-                />
-              </div>
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-sm mt-1 text-start">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white md:w-1/3 shadow-lg rounded-lg w-full max-w-md sm:w-1/4 lg:w-1/2 p-4 md:p-8 z-20"
+      >
+        <h2 className="text-4xl font-semibold mb-6 text-center text-gray-800">
+          Register
+        </h2>
+
+    
+
+        <div className="mb-6 flex items-center">
+          <label className="block text-gray-700 w-24 mr-2" htmlFor="username">
+            Username:
+          </label>
+          <div className="flex-1">
+            <div className="flex items-center border rounded-lg overflow-hidden">
+              <span className="p-3 text-black rounded-md h-12">
+                <FiUser className="mt-1" />
+              </span>
+              <input
+                {...register("username", { required: "Username is required." })}
+                id="username"
+                className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                  errors.username
+                    ? "border-red-500 focus:ring-red-300"
+                    : "focus:ring-pink-200"
+                }`}
+                placeholder="Username"
+              />
             </div>
+            {errors.username && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.username.message}
+              </p>
+            )}
           </div>
+        </div>
 
-          {/* <div className="mb-6 flex items-center">
-            <label className="block text-gray-700 w-24 mr-2" htmlFor="phoneNumber">
-            phone Number:
-            </label>
-            <div className="flex-1">
-              <div className="flex items-center border rounded-lg overflow-hidden">
-                <span className="p-3 bg-pink-500 text-white rounded-md h-12">
-                  <FiLock className="mt-1" />
-                </span>
-                <input
-                  {...register("phoneNumber", { required: "phone Number is required." })}
-                  id="phoneNumber"
-                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.phoneNumber
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
-                  placeholder="phone Number"
-                />
-              </div>
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.password.message}
-                </p>
-              )}
+        <div className="mb-6 flex items-center">
+          <label className="block text-gray-700 w-24 mr-2" htmlFor="email">
+            Email:
+          </label>
+          <div className="flex-1">
+            <div className="flex items-center border rounded-lg overflow-hidden">
+              <span className="p-3 text-black rounded-md h-12">
+                <FiMail className="mt-1" />
+              </span>
+              <input
+                {...register("email", {
+                  required: "Email is required.",
+                  pattern: {
+                    value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                    message: "Please enter a valid email address.",
+                  },
+                })}
+                id="email"
+                className={`border-0 flex-1 py-3 w-full px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                  errors.email
+                    ? "border-red-500 focus:ring-red-300"
+                    : "focus:ring-pink-200"
+                }`}
+                placeholder="example@mail.com"
+              />
             </div>
-          </div> */}
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+        </div>
 
-          <button
+        <div className="mb-6 flex items-center">
+          <label className="block text-gray-700 w-24 mr-2" htmlFor="password">
+            Password:
+          </label>
+          <div className="flex-1">
+            <div className="flex items-center border rounded-lg overflow-hidden">
+              <span className="p-3 text-black rounded-md h-12">
+                <FiLock className="mt-1" />
+              </span>
+              <input
+                {...register("password", { required: "Password is required." })}
+                id="password"
+                className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                  errors.password
+                    ? "border-red-500 focus:ring-red-300"
+                    : "focus:ring-pink-200"
+                }`}
+                placeholder="********"
+              />
+            </div>
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+        </div>
+    <div className="mb-6 flex items-center">
+          <label className="block text-gray-700 w-24 mr-2" htmlFor="confirmPassword">
+           Confirm Password:
+          </label>
+          <div className="flex-1">
+            <div className="flex items-center border rounded-lg overflow-hidden">
+              <span className="p-3 text-black rounded-md h-12">
+                <FiLock className="mt-1" />
+              </span>
+              <input
+                {...register("confirmPassword", { required: "confirm Password is required." })}
+                id="confirmPassword"
+                className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                  errors.confirmPassword
+                    ? "border-red-500 focus:ring-red-300"
+                    : "focus:ring-pink-200"
+                }`}
+                placeholder="********"
+              />
+            </div>
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+      
+        <button
             type="submit"
             className="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-lg transition duration-300 transform hover:scale-105"
           >
             Register
           </button>
-
           <p className="mt-6 text-center text-gray-600">
-            Already have an account?{" "}
-            <Link to="/login" className="text-pink-600 hover:underline">
-              Login
-            </Link>
-          </p>
-        </form>
+          Already have an account?{" "}
+          <Link to="/Login" className="text-pink-600 hover:underline">
+            Login
+          </Link>
+        </p>
+      </form>
       </div>
-
-      <Snackbar
-                  anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                  open={state.open}
-                  onClose={handleClose}
-                  TransitionComponent={state.Transition}
-                  message={error?.response?.data?.message || message}
-                  key={state?.Transition?.name}
-                  autoHideDuration={3000}
-              />
-      </>
-    );
-  };
+    </div>
+  );
+};
 
   export default RegisterPage;

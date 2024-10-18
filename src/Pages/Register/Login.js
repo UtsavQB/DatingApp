@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
 import couplesvg from "../../Assets/Icon/couple.svg";
 import Landsvg from "../../Assets/Icon/Land.svg";
@@ -9,9 +9,12 @@ import Flower from "../../Assets/Icon/Flower.svg";
 import Flower2 from "../../Assets/Icon/Flower2.svg";
 import Flower3 from "../../Assets/Icon/Flower3.svg";
 import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
-
+import Frame from "../../Assets/Icon/Frame.svg";
+// import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
   const navigate = useNavigate()
   const {
     register,
@@ -79,6 +82,9 @@ try {
           </span>
           <span className="absolute right-0 bottom-0 flex items-center">
             <img src={Flower3} alt="flower3" className="h-auto w-full" />
+          </span>
+          <span className="absolute top-20 		 flex item-center">
+            <img src={Frame} alt="Frame" className="animate-bounce"/>
           </span>
           <span className="absolute left-4 md:left-12 lg:left-48 bottom-4 md:bottom-6 lg:bottom-10 z-20 flex items-center pl-2 sm:left-4 xl:left-48 sm:bottom-4 xl:bottom-10 sm:pl-3">
             <img
