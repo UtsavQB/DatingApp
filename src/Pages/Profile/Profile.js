@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import { FaCamera, FaEdit } from "react-icons/fa";
 import Select from "react-select";
-import Flower from "../../Assets/Icon/Flower.svg";
+import dategirl from '../../Image/how-to-date-a-girl-1.jpg'
+import coffee from '../../Image/young-asian-couple-dating-coffee-600nw-2274063101.webp'
+import couple from '../../Image/young-beautiful-couple-speaking-smiling-resting-cafe_176420-2284.avif';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const genderOptions = [
   { value: "male", label: "Male" },
@@ -20,6 +25,32 @@ const hobbiesOptions = [
 ];
 
 const ProfilePage = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000
+  };
+  const carouselItems = [
+    {
+      id: 1,
+      title: "Slide 1",
+      imageUrl: dategirl,
+    },
+    {
+      id: 2,
+      title: "Slide 2",
+      imageUrl: coffee,
+    },
+    {
+      id: 3,
+      title: "Slide 3",
+      imageUrl: couple,
+    },
+  ]; 
   const {
     register,
     setValue,
@@ -44,16 +75,41 @@ const ProfilePage = () => {
     }
   };
 
+  
+
   return (
-    <div className="min-h-screen bg-pink-100 flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative">
+    <div className="min-h-screen  flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative bg-pink-100 ">
+      {/* <div class="snap-x ...">
+        <div class="snap-center ...">
+          <img src="" />
+        </div>
+      </div> */}
       <div className="hidden md:flex md:w-1/2 items-center justify-center w-full">
-        <span className="absolute left-0 top-0 flex items-center">
-          <img src={Flower} alt="flower" className="h-auto w-full" />
-        </span>
+
+        <div className="bg-white md:w-full shadow-lg rounded-lg w-full p-4 md:p-8 z-20">
+        <div className="container mx-auto px-4 py-8">
+      <Slider {...settings}>
+        {carouselItems.map((item) => (
+          
+          <div key={item.id} className="p-4">
+            <img
+              src={item.imageUrl}
+              alt={item.title}
+              className="w-full h-64 object-cover rounded-lg shadow-md"
+            />
+            <h2 className="text-lg text-center mt-4 font-semibold">{item.title}</h2>
+          </div>
+        ))}
+      </Slider>
+    </div>
+        </div>
+
+
+
       </div>
 
-      {/* <div className="bg-white md:w-1/2 shadow-lg rounded-lg w-full max-w-md sm:w-full lg:w-1/3 p-4 md:p-8 z-20">
-        <div className="text-center mb-8">
+      <div className="bg-white md:w-1/2 shadow-lg rounded-lg w-full max-w-md sm:w-full lg:w-1/3 p-4 md:p-8 z-20 ">
+        <div className="text-center mb-8 ">
           <h1 className="text-3xl font-bold text-pink-700">Profile</h1>
           <p className="text-md text-gray-500">
             Please update your details below
@@ -61,7 +117,7 @@ const ProfilePage = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-center mb-4 relative">
+          <div className="flex justify-center mb-4 relative ">
             <label htmlFor="profile-photo" className="cursor-pointer">
               <div className="relative w-24 h-24">
                 <img
@@ -95,11 +151,10 @@ const ProfilePage = () => {
                 required: "First Name is required.",
               })}
               id="firstname"
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                errors.firstname
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-pink-200"
-              }`}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.firstname
+                ? "border-red-500 focus:ring-red-300"
+                : "focus:ring-pink-200"
+                }`}
               placeholder="First Name"
             />
             {errors.firstname && (
@@ -116,11 +171,10 @@ const ProfilePage = () => {
             <input
               {...register("lastname", { required: "Last Name is required." })}
               id="lastname"
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                errors.lastname
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-pink-200"
-              }`}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.lastname
+                ? "border-red-500 focus:ring-red-300"
+                : "focus:ring-pink-200"
+                }`}
               placeholder="Last Name"
             />
             {errors.lastname && (
@@ -145,11 +199,10 @@ const ProfilePage = () => {
               })}
               id="age"
               min="18" // Set minimum age to 18
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                errors.age
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-pink-200"
-              }`}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.age
+                ? "border-red-500 focus:ring-red-300"
+                : "focus:ring-pink-200"
+                }`}
               placeholder="Age"
             />
             {errors.age && (
@@ -192,11 +245,10 @@ const ProfilePage = () => {
               {...register("dateOfBirth", {
                 required: "Date of Birth is required.",
               })}
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                errors.dateOfBirth
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-pink-200"
-              }`}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.dateOfBirth
+                ? "border-red-500 focus:ring-red-300"
+                : "focus:ring-pink-200"
+                }`}
             />
             {errors.dateOfBirth && (
               <p className="text-red-500 text-sm mt-1">
@@ -235,7 +287,7 @@ const ProfilePage = () => {
             </Link>
           </p>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
