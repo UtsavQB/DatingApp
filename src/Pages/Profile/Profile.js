@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { FaCamera, FaEdit } from "react-icons/fa";
 import Select from "react-select";
-import dategirl from '../../Image/how-to-date-a-girl-1.jpg'
-import coffee from '../../Image/young-asian-couple-dating-coffee-600nw-2274063101.webp'
-import couple from '../../Image/young-beautiful-couple-speaking-smiling-resting-cafe_176420-2284.avif';
+import dategirl from "../../Image/how-to-date-a-girl-1.jpg";
+import coffee from "../../Image/young-asian-couple-dating-coffee-600nw-2274063101.webp";
+import couple from "../../Image/young-beautiful-couple-speaking-smiling-resting-cafe_176420-2284.avif";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const genderOptions = [
@@ -32,8 +34,11 @@ const ProfilePage = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000
+    autoplaySpeed: 2000,
+
+   
   };
+  const navigate = useNavigate()
   const carouselItems = [
     {
       id: 1,
@@ -50,7 +55,7 @@ const ProfilePage = () => {
       title: "Slide 3",
       imageUrl: couple,
     },
-  ]; 
+  ];
   const {
     register,
     setValue,
@@ -59,8 +64,9 @@ const ProfilePage = () => {
   } = useForm();
   const [profilePhoto, setProfilePhoto] = useState(null);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    await fetchData(data);
     // Handle profile update logic here
   };
 
@@ -75,7 +81,31 @@ const ProfilePage = () => {
     }
   };
 
-  
+  const getid = localStorage.getItem("id");
+  // console.log(getid,'getid')
+
+  const fetchData = async (data) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/api/userProfile/profile/update/${getid}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log(result, "Response Data");
+       navigate('');
+    } catch (error) {}
+  };
 
   return (
     <div className="min-h-screen  flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative bg-pink-100 ">
@@ -85,27 +115,24 @@ const ProfilePage = () => {
         </div>
       </div> */}
       <div className="hidden md:flex md:w-1/2 items-center justify-center w-full">
-
         <div className="bg-white md:w-full shadow-lg rounded-lg w-full p-4 md:p-8 z-20">
-        <div className="container mx-auto px-4 py-8">
-      <Slider {...settings}>
-        {carouselItems.map((item) => (
-          
-          <div key={item.id} className="p-4">
-            <img
-              src={item.imageUrl}
-              alt={item.title}
-              className="w-full h-64 object-cover rounded-lg shadow-md"
-            />
-            <h2 className="text-lg text-center mt-4 font-semibold">{item.title}</h2>
+          <div className="container mx-auto px-4 py-8">
+            <Slider {...settings}>
+              {carouselItems.map((item) => (
+                <div key={item.id} className="p-4">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="w-full h-64 object-cover rounded-lg shadow-md"
+                  />
+                  <h2 className="text-lg text-center mt-4 font-semibold">
+                    {item.title}
+                  </h2>
+                </div>
+              ))}
+            </Slider>
           </div>
-        ))}
-      </Slider>
-    </div>
         </div>
-
-
-
       </div>
 
       <div className="bg-white md:w-1/2 shadow-lg rounded-lg w-full max-w-md sm:w-full lg:w-1/3 p-4 md:p-8 z-20 ">
@@ -131,35 +158,46 @@ const ProfilePage = () => {
               </div>
             </label>
             <input
+               {...register("userImage", {
+                required: "Image is required.",
+              })}
               type="file"
               id="profile-photo"
               accept="image/*"
               onChange={handlePhotoUpload}
               className="hidden"
             />
+               {errors.userImage && (
+              <p className="text-red-500 text-sm absolute top-24">
+                {errors.userImage.message}
+              </p>
+            )}
           </div>
+
+        
 
           <div className="mb-4 flex items-center">
             <label
               className="block text-gray-700 mr-3 w-24"
-              htmlFor="firstname"
+              htmlFor="userFirstName"
             >
               First Name:
             </label>
             <input
-              {...register("firstname", {
+              {...register("userFirstName", {
                 required: "First Name is required.",
               })}
               id="firstname"
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.firstname
-                ? "border-red-500 focus:ring-red-300"
-                : "focus:ring-pink-200"
-                }`}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                errors.firstname
+                  ? "border-red-500 focus:ring-red-300"
+                  : "focus:ring-pink-200"
+              }`}
               placeholder="First Name"
             />
-            {errors.firstname && (
+            {errors.userFirstName && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.firstname.message}
+                {errors.userFirstName.message}
               </p>
             )}
           </div>
@@ -169,17 +207,20 @@ const ProfilePage = () => {
               Last Name:
             </label>
             <input
-              {...register("lastname", { required: "Last Name is required." })}
+              {...register("userLastName", {
+                required: "Last Name is required.",
+              })}
               id="lastname"
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.lastname
-                ? "border-red-500 focus:ring-red-300"
-                : "focus:ring-pink-200"
-                }`}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                errors.lastname
+                  ? "border-red-500 focus:ring-red-300"
+                  : "focus:ring-pink-200"
+              }`}
               placeholder="Last Name"
             />
-            {errors.lastname && (
+            {errors.userLastName && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.lastname.message}
+                {errors.userLastName.message}
               </p>
             )}
           </div>
@@ -199,10 +240,11 @@ const ProfilePage = () => {
               })}
               id="age"
               min="18" // Set minimum age to 18
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.age
-                ? "border-red-500 focus:ring-red-300"
-                : "focus:ring-pink-200"
-                }`}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                errors.age
+                  ? "border-red-500 focus:ring-red-300"
+                  : "focus:ring-pink-200"
+              }`}
               placeholder="Age"
             />
             {errors.age && (
@@ -214,25 +256,34 @@ const ProfilePage = () => {
             <label className="block text-gray-700 mr-3 w-24">Gender:</label>
             <Select
               options={genderOptions}
-              onChange={(option) => setValue("gender", option)}
+              onChange={(option) => setValue("gender", option?.value)}
               className={`w-full ${errors.gender ? "border-red-500" : ""}`}
               placeholder="Select Gender"
             />
             {errors.gender && (
-              <p className="text-red-500 text-sm mt-1">{errors.gender.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.gender.message}
+              </p>
             )}
           </div>
 
           <div className="mb-4 flex items-center">
-            <label className="block text-gray-700 mr-3 w-24">Interested Gender:</label>
+            <label className="block text-gray-700 mr-3 w-24">
+              Interested Gender:
+            </label>
             <Select
               options={genderOptions}
-              onChange={(option) => setValue("interestedGender", option)}
-              className={`w-full ${errors.interestedGender ? "border-red-500" : ""}`}
+              onChange={(option) => setValue("interestedGender", option?.value)}
+              className={`w-full ${
+                errors.interestedGender ? "border-red-500" : ""
+              }`}
               placeholder="Select Interested Gender"
             />
+
             {errors.interestedGender && (
-              <p className="text-red-500 text-sm mt-1">{errors.interestedGender.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.interestedGender.message}
+              </p>
             )}
           </div>
 
@@ -242,32 +293,49 @@ const ProfilePage = () => {
             </label>
             <input
               type="date"
-              {...register("dateOfBirth", {
+              {...register("birthday", {
                 required: "Date of Birth is required.",
               })}
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.dateOfBirth
-                ? "border-red-500 focus:ring-red-300"
-                : "focus:ring-pink-200"
-                }`}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                errors.dateOfBirth
+                  ? "border-red-500 focus:ring-red-300"
+                  : "focus:ring-pink-200"
+              }`}
             />
-            {errors.dateOfBirth && (
+            {errors.birthday && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.dateOfBirth.message}
+                {errors.birthday.message}
               </p>
             )}
           </div>
 
           <div className="mb-4 flex items-center">
             <label className="block text-gray-700 mr-3 w-24">Hobbies:</label>
+            {/* <Select
+              options={hobbiesOptions}
+              isMulti
+              onChange={(options) => setValue("hobbies", options.map()=>{})}
+              className={`w-full ${errors.hobbies ? "border-red-500" : ""}`}
+              placeholder="Select or create hobbies"
+            /> */}
+
             <Select
               options={hobbiesOptions}
               isMulti
-              onChange={(options) => setValue("hobbies", options)}
+              onChange={(options) =>
+                setValue(
+                  "hobbies",
+                  options.map((option) => option.value)
+                )
+              }
               className={`w-full ${errors.hobbies ? "border-red-500" : ""}`}
               placeholder="Select or create hobbies"
             />
+
             {errors.hobbies && (
-              <p className="text-red-500 text-sm mt-1">{errors.hobbies.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.hobbies.message}
+              </p>
             )}
           </div>
 

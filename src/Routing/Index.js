@@ -8,6 +8,7 @@ import Home from "../Pages/Home";
 import Profile from "../Pages/Profile/Profile";
 import Phone from "../Pages/Register/Phone"
 import Forgotpass from "../Pages/Register/Forgotpass";
+import ConfirmEmail from "../Pages/Register/ConfirmEmail";
 
 const Routing = () => {
   return (
@@ -20,7 +21,8 @@ const Routing = () => {
         <Route exact path="Home" element={<Home />}></Route>
         <Route exact path="profile" element={<Profile />}></Route>
         <Route exact path="phoneNumber" element={<Phone />}></Route>
-        <Route exact path="Forgotpassword" element={<Forgotpass />}></Route>
+        <Route exact path='/reset-password/:token' element={<Forgotpass />}></Route>
+        <Route exact path="Forgotpassword" element={<ConfirmEmail />}></Route>
         
 
 

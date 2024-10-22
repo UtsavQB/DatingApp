@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import { useForm } from "react-hook-form";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import couplesvg from "../../Assets/Icon/couple.svg";
 import Landsvg from "../../Assets/Icon/Land.svg";
 import Buildings from "../../Assets/Icon/Buidings.svg";
@@ -10,12 +10,12 @@ import Flower2 from "../../Assets/Icon/Flower2.svg";
 import Flower3 from "../../Assets/Icon/Flower3.svg";
 import Frame from "../../Assets/Icon/Frame.svg";
 
-  const Forgotpass = () => {
+  const ConfirmEmail = () => {
     const [message, setMessage] = useState('')
     console.log("message",message);
     const navigate = useNavigate();
-    const ConfirmEmail = localStorage.getItem("ConfirmEmail") 
-    let { token } = useParams();
+
+
     const {
       register,
       handleSubmit,
@@ -29,16 +29,17 @@ import Frame from "../../Assets/Icon/Frame.svg";
     const fetchData = async (formData) => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/api/auth/reset-password/${token}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify({...formData,email:ConfirmEmail}),
-          }
-        );
+        `${process.env.REACT_APP_API_BASE_URL}/api/auth/reset-password-request`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+  
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -47,11 +48,12 @@ import Frame from "../../Assets/Icon/Frame.svg";
         const result = await response.json();
         console.log(result, "Response Data");
         setMessage(result.message)
-        console.log(formData.email, "formData.email");
-        localStorage.setItem("Email", formData.email )
+        console.log( formData.emailOrUsername , "ConfirmEmail");
+
+        localStorage.setItem("ConfirmEmail", formData.emailOrUsername )
         setState({ open: true })
         setTimeout(()=>{
-          navigate("/Otp")
+        //   navigate("/reset-password/:token")
         },2000)  
       } catch (error) {
         console.error("Error:", error);
@@ -101,68 +103,48 @@ import Frame from "../../Assets/Icon/Frame.svg";
       className="bg-white md:w-1/3 shadow-lg rounded-lg w-full max-w-md sm:w-1/4 lg:w-1/2 p-4 md:p-8 z-20"
     >
       <h2 className="text-4xl font-semibold mb-6 text-center text-gray-800">
-        Forgot password
+        Confirm Email
       </h2>
       <div className="mb-6 flex items-center">
-          <label className="block text-gray-700 w-24 mr-2" htmlFor="password">
-            New Password:
-          </label>
-          <div className="flex-1">
-            <div className="flex items-center border rounded-lg overflow-hidden">
-              <span className="p-3 text-black rounded-md h-12">
-                <FiLock className="mt-1" />
-              </span>
-              <input
-                {...register("newPassword", { required: "New Password is required." })}
-                id="password"
-                className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                  errors.newPassword
-                    ? "border-red-500 focus:ring-red-300"
-                    : "focus:ring-pink-200"
-                }`}
-                placeholder="********"
-              />
+              <label className="block text-gray-700 w-24 mr-2" htmlFor="email">
+                Email / Username:
+              </label>
+              <div className="flex-1">
+                <div className="flex items-center border rounded-lg overflow-hidden">
+                  <span className="p-3 text-black rounded-md h-12">
+                    <FiMail className="mt-1" />
+                  </span>
+                  <input
+                  type="text"
+                    {...register("emailOrUsername", {
+                      required: "Email Or Username is required.",
+                    //   pattern: {
+                    //     value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                    //     message: "Please enter a valid email address.",
+                    //   },
+                    })}
+                    id="email"
+                    className={`border-0 flex-1 py-3 w-full px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                      errors.emailOrUsername
+                        ? "border-red-500 focus:ring-red-300"
+                        : "focus:ring-pink-200"
+                    }`}
+                    placeholder="example@mail.com or Username"
+                  />
+                </div>
+                {errors.emailOrUsername && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.emailOrUsername.message}
+                  </p>
+                )}
+              </div>
             </div>
-            {errors.newPassword && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.newPassword.message}
-              </p>
-            )}
-          </div>
-          </div>
-          <div className="mb-6 flex items-center">
-          <label className="block text-gray-700 w-24 mr-2" htmlFor="confirmPassword">
-           Confirm Password:
-          </label>
-          <div className="flex-1">
-            <div className="flex items-center border rounded-lg overflow-hidden">
-              <span className="p-3 text-black rounded-md h-12">
-                <FiLock className="mt-1" />
-              </span>
-              <input
-                {...register("confirmPassword", { required: "confirm Password is required." })}
-                id="confirmPassword"
-                className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                  errors.confirmPassword
-                    ? "border-red-500 focus:ring-red-300"
-                    : "focus:ring-pink-200"
-                }`}
-                placeholder="********"
-              />
-            </div>
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-        </div>
 
         <button
             type="submit"
             className="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-lg transition duration-300 transform hover:scale-105"
           >
-            Forgot password
+            Send Email
 
           </button>
       </form>
@@ -170,4 +152,4 @@ import Frame from "../../Assets/Icon/Frame.svg";
       </div>
     )
   }
-  export default Forgotpass;
+  export default ConfirmEmail;
