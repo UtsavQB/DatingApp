@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { FiUser, FiMail, FiLock } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
-import Select from 'react-select'
+// import { FiUser, FiMail, FiLock } from "react-icons/fi";
+// import { useNavigate } from "react-router-dom";
+// import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import React, { useState, useMemo } from 'react'
 import PhoneInput from 'react-phone-input-2'
