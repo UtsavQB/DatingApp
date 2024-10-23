@@ -1,10 +1,10 @@
-  import React, { useState, useEffect } from "react";
+  import React, { useState } from "react";
   import { useForm } from "react-hook-form";
   import { FiUser, FiMail, FiLock } from "react-icons/fi";
   import { Link } from "react-router-dom";
   import { useNavigate } from "react-router-dom";
   // import { useUpdateSingle } from '../../hooks/Api';
-  import { Snackbar } from '@mui/material';
+  // import { Snackbar } from '@mui/material';
 import couplesvg from "../../Assets/Icon/couple.svg";
 import Landsvg from "../../Assets/Icon/Land.svg";
 import Buildings from "../../Assets/Icon/Buidings.svg";
@@ -15,7 +15,7 @@ import Frame from "../../Assets/Icon/Frame.svg";
 
 
   const RegisterPage = () => {
-    const [data, setData] = useState();
+    // const [data, setData] = useState();
     const [message, setMessage] = useState('')
     console.log("message",message);
     
@@ -63,7 +63,7 @@ import Frame from "../../Assets/Icon/Frame.svg";
       }
     };
   // snakbar
-  const { mutate, isSuccess, isError, error, data: Updated_response, isLoading } = useForm()
+  // const { mutate, isSuccess, isError, error, data: Updated_response, isLoading } = useForm()
     const [state, setState] = useState({
       open: false
   });

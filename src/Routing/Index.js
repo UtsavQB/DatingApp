@@ -8,6 +8,9 @@ import Home from "../Pages/Home";
 import Profile from "../Pages/Profile/Profile";
 import Phone from "../Pages/Register/Phone"
 import Forgotpass from "../Pages/Register/Forgotpass";
+import Profile2 from "../Pages/Profile/Profile2"
+import Sidebar from "../Pages/Register/Sidebar"
+import Location from "../Pages/Register/Location"
 
 const Routing = () => {
   return (
@@ -21,9 +24,10 @@ const Routing = () => {
         <Route exact path="profile" element={<Profile />}></Route>
         <Route exact path="phoneNumber" element={<Phone />}></Route>
         <Route exact path="Forgotpassword" element={<Forgotpass />}></Route>
+        <Route exact path="profile2" element={<Profile2 />}></Route>
+        <Route exact path="sidebar" element={<Sidebar />}></Route>
+        <Route exact path="location" element={<Location />}></Route>
         
-
-
       </Routes>
     </BrowserRouter>
   );
