@@ -138,14 +138,14 @@ const ProfilePages = () => {
             type="submit"
             className="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-lg transition duration-200"
           >
-            Save Changes
+            Submit
           </button>
         </form>
 
         <div className="text-center mt-8">
           <p className="text-sm text-gray-500">
             Want to go back?{" "}
-            <Link to="/" className="text-pink-600 hover:underline">
+            <Link to="/profile" className="text-pink-600 hover:underline">
               Cancel
             </Link>
           </p>

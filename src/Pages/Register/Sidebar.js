@@ -10,6 +10,7 @@ const items1 = ['Home', 'Matches', 'Messages', 'Profile', 'Settings'].map((key, 
 
 const items2 = [
   { icon: UserOutlined, label: 'My Profile' },
+  { icon: UserOutlined, label: 'Interests' },
   { icon: HeartOutlined, label: 'Favorites' },
   { icon: MessageOutlined, label: 'Chats' },
   { icon: UserAddOutlined, label: 'Find Matches' },
