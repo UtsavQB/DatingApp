@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import {
   HeartOutlined,
   MessageOutlined,
@@ -16,10 +16,12 @@ import {
   Form,
   Select,
   DatePicker,
+  Button,
 } from "antd";
 import { FaCamera, FaEdit } from "react-icons/fa";
 
-const { Header, Content, Sider } = Layout;
+
+const { Header, Content, Sider, Footer } = Layout;
 
 const items1 = ["Home", "Matches", "Messages", "Profile", "Settings"].map(
   (key, index) => ({
@@ -45,57 +47,142 @@ const items2 = [
 ];
 
 const Sidebar = () => {
-  const [selectedKey, setSelectedKey] = useState("sub1");
-  const [genderOptions, setGenderOptions] = useState([]);
-  const [relationshipterm, setRelationshipterm] = useState([]);
-  const [relationshiptype, setRelationshiptype] = useState([]);
+    const [selectedKey, setSelectedKey] = useState("sub1");
+    const [genderOptions, setGenderOptions] = useState([]);
+    const [relationshipterm, setRelationshipterm] = useState([]);
+    const [relationshiptype, setRelationshiptype] = useState([]);
+    const [familyPlanOptions, setFamilyPlanOptions] = useState([]);
 
+  
+   
+    const handleMenuClick = (e) => {
+      setSelectedKey(e.key);
+    };
+  
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      setValue,
+      control,
+      watch,
+    } = useForm();
+  
+    const hobbiesOptions = [
+      { value: "reading", label: "Reading" },
+      { value: "traveling", label: "Traveling" },
+      { value: "gaming", label: "Gaming" },
+      // Add more hobbies as needed
+    ];
 
-  const handleMenuClick = (e) => {
-    setSelectedKey(e.key);
-  };
+    const { fields: zodiacFields, append: appendZodiac, remove: removeZodiac } = useFieldArray({
+        control,
+        name: "zodiacSigns"
+      });
+      
+      const { fields: educationFields, append: appendEducation, remove: removeEducation } = useFieldArray({
+        control,
+        name: "educationLevels"
+      });
+      
+      const { fields: familyPlanFields, append: appendFamilyPlan, remove: removeFamilyPlan } = useFieldArray({
+        control,
+        name: "familyPlans"
+      });
+    
+      const [zodiacOptions, setZodiacOptions] = useState([]);
+      const [educationOptions, setEducationOptions] = useState([]);
+      const [personalityType, setPersonalityType] = useState([]);
+    
+      useEffect(() => {
+        // Fetch zodiac signs
+        const fetchZodiacSigns = async () => {
+          const response = await fetch("/api/zodiac-signs"); // Replace with your actual API
+          const data = await response.json();
+          setZodiacOptions(data);
+        };
+    
+        // Fetch education levels
+        const fetchEducationLevels = async () => {
+          const response = await fetch("/api/education-levels"); 
+          const data = await response.json();
+          setEducationOptions(data);
+        };
+    
+        // Fetch family plans
+        const fetchFamilyPlans = async () => {
+          const response = await fetch("/api/family-plans"); 
+          const data = await response.json();
+          setFamilyPlanOptions(data);
+        };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    watch,
-  } = useForm();
-
-  const hobbiesOptions = [
-    { value: "reading", label: "Reading" },
-    { value: "traveling", label: "Traveling" },
-    { value: "gaming", label: "Gaming" },
-    // Add more hobbies as needed
-  ];
-
+        const fetchPersonalitytype = async () => {
+          const response = await fetch("/api/family-plans"); 
+          const data = await response.json();
+          setPersonalityType(data);
+        };
+    
+        fetchZodiacSigns();
+        fetchEducationLevels();
+        fetchFamilyPlans();
+        fetchPersonalitytype();
+      }, []);
+    
+  
   return (
-    <Layout>
-      <Header className="flex items-center">
+    <Layout style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Header
+      className="flex items-center"
+      >
         <div className="demo-logo" />
         <Menu
-          theme="light"
+          theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={['2']}
           items={items1}
-          style={{ flex: 1, minWidth: 0 }}
+          style={{
+            flex: 1,
+            minWidth: 0,
+          }}
         />
       </Header>
-      <Layout>
-        <Sider width={300} className="bg-contain">
-          <Menu
-            mode="inline"
-            selectedKeys={[selectedKey]}
-            className="h-full z-0"
-            items={items2}
-            onClick={handleMenuClick}
-          />
-        </Sider>
-        <Layout style={{ padding: "0 24px 24px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }} />
-          <Content className="flex justify-center">
-            <Card className="p-6 m-0 min-h-72 w-1/3 bg-white rounded-lg text-lg font-medium">
+      <Content
+        style={{
+          padding: '0 48px',
+        }}
+      >
+        {/* <Breadcrumb
+          style={{
+            margin: '16px 0',
+          }}
+        >
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          <Breadcrumb.Item>List</Breadcrumb.Item>
+          <Breadcrumb.Item>App</Breadcrumb.Item>
+        </Breadcrumb> */}
+        <Layout>
+          <Sider
+           className="bg-contain h-screen"
+            width={300}
+          >
+            <Menu
+              mode="inline"
+              defaultSelectedKeys={['1']}
+              defaultOpenKeys={['sub1']}
+              style={{
+                height: '100%',
+              }}
+              items={items2}
+            />
+          </Sider>
+          <Content
+          className="flex justify-center h-full"
+            style={{
+              padding: '0 24px',
+              minHeight: 280,
+            }}
+          >
+          <Card className="p-6 m-0 min-h-72 w-1/3 bg-white rounded-lg text-lg font-medium">
               {selectedKey === "sub1" ? (
                 <Form layout="vertical">
                   {/* <div className="flex justify-center mb-4 relative">
@@ -326,6 +413,92 @@ const Sidebar = () => {
                       </p>
                     )}
                   </div>
+                  <div className="mb-1 items-center">
+                    <label className="text-gray-700 mr-3 w-full flex">
+                      Zodiac Sign:
+                    </label>
+                    <Select
+                      options={zodiacOptions.map((option) => ({
+                        value: option.id,
+                        label: option.name,
+                      }))} 
+                      onChange={(option) => setValue("zodiacOptions", option)}
+                      className={`w-full backdrop-blur-md h-10 bg-white/40 bg-opacity-10 z-20 ${
+                        errors.setZodiacOptions ? "border-red-500" : ""
+                      } border border-transparent`}
+                      placeholder="Select Relationship-type"
+                    />
+                    {errors.zodiacOptions && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.zodiacOptions.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="mb-1 items-center">
+                    <label className="text-gray-700 mr-3 w-full flex">
+                    Education Levels:
+                    </label>
+                    <Select
+                      options={educationOptions.map((option) => ({
+                        value: option.id,
+                        label: option.name,
+                      }))} 
+                      onChange={(option) => setValue("educationOptions", option)}
+                      className={`w-full backdrop-blur-md h-10 bg-white/40 bg-opacity-10 z-20 ${
+                        errors.setEducationOptions ? "border-red-500" : ""
+                      } border border-transparent`}
+                      placeholder="Select Relationship-type"
+                    />
+                    {errors.educationOptions && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.educationOptions.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="mb-1 items-center">
+                    <label className="text-gray-700 mr-3 w-full flex">
+                    Family Plans:
+                    </label>
+                    <Select
+                      options={familyPlanOptions.map((option) => ({
+                        value: option.id,
+                        label: option.name,
+                      }))} 
+                      onChange={(option) => setValue("familyPlanOptions", option)}
+                      className={`w-full backdrop-blur-md h-10 bg-white/40 bg-opacity-10 z-20 ${
+                        errors.setFamilyPlanOptions ? "border-red-500" : ""
+                      } border border-transparent`}
+                      placeholder="Select Relationship-type"
+                    />
+                    {errors.familyPlanOptions && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.familyPlanOptions.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="mb-1 items-center">
+                    <label className="text-gray-700 mr-3 w-full flex">
+                    Personality Type:
+                    </label>
+                    <Select
+                      options={personalityType.map((option) => ({
+                        value: option.id,
+                        label: option.name,
+                      }))} 
+                      onChange={(option) => setValue("personalityType", option)}
+                      className={`w-full backdrop-blur-md h-10 bg-white/40 bg-opacity-10 z-20 ${
+                        errors.setPersonalityType ? "border-red-500" : ""
+                      } border border-transparent`}
+                      placeholder="Select Personality-type"
+                    />
+                    {errors.personalityType && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.personalityType.message}
+                      </p>
+                    )}
+                  </div>
+                  
+                 
                 </Form>
               ) : (
                 <div>
@@ -338,9 +511,13 @@ const Sidebar = () => {
             </Card>
           </Content>
         </Layout>
-      </Layout>
+      </Content>
+      <Footer
+      className="text-center"
+      >
+        Dating App ©{new Date().getFullYear()} Created by Intern team
+      </Footer>
     </Layout>
   );
 };
-
 export default Sidebar;

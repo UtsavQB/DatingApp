@@ -10,7 +10,7 @@ import Phone from "../Pages/Register/Phone"
 import Forgotpass from "../Pages/Register/Forgotpass";
 import Profile2 from "../Pages/Profile/Profile2"
 import Sidebar from "../Pages/Register/Sidebar"
-import Location from "../Pages/Register/Location"
+import Sidebar1 from "../Pages/common/Sidebar1"
 
 const Routing = () => {
   return (
@@ -26,7 +26,7 @@ const Routing = () => {
         <Route exact path="Forgotpassword" element={<Forgotpass />}></Route>
         <Route exact path="profile2" element={<Profile2 />}></Route>
         <Route exact path="sidebar" element={<Sidebar />}></Route>
-        <Route exact path="location" element={<Location />}></Route>
+        <Route exact path="sidebar1" element={<Sidebar1 />}></Route>
         
       </Routes>
     </BrowserRouter>
