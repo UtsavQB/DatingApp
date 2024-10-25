@@ -6,11 +6,11 @@ import Input from "../components/UIComponent/input";
 import Login from "../Pages/Register/Login";
 import Home from "../Pages/Home";
 import Profile from "../Pages/Profile/Profile";
-import Phone from "../Pages/Register/Phone"
 import Forgotpass from "../Pages/Register/Forgotpass";
 import Profile2 from "../Pages/Profile/Profile2"
 import Sidebar from "../Pages/Register/Sidebar"
-import Location from "../Pages/Register/Location"
+import Sidebar1 from "../Pages/common/Sidebar1"
+import SocialAuth from "../Pages/Register/GoogleLogin";
 
 const Routing = () => {
   return (
@@ -22,11 +22,11 @@ const Routing = () => {
         <Route exact path="Login" element={<Login />}></Route>
         <Route exact path="Home" element={<Home />}></Route>
         <Route exact path="profile" element={<Profile />}></Route>
-        <Route exact path="phoneNumber" element={<Phone />}></Route>
         <Route exact path="Forgotpassword" element={<Forgotpass />}></Route>
         <Route exact path="profile2" element={<Profile2 />}></Route>
         <Route exact path="sidebar" element={<Sidebar />}></Route>
-        <Route exact path="location" element={<Location />}></Route>
+        <Route exact path="sidebar1" element={<Sidebar1 />}></Route>
+        <Route exact path="SocialAuth" element={<SocialAuth />}></Route>
         
       </Routes>
     </BrowserRouter>

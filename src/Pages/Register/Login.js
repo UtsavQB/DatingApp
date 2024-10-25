@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
@@ -58,10 +58,30 @@ try {
 } catch (error) {
   console.error("Error:", error);
 }
-
-
-
 }  
+
+const handleGoogleClick = useCallback(() => {
+  const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+  
+  const scope = [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+  ].join(" ");
+
+  const params = new URLSearchParams({
+    response_type: "code",
+    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    redirect_uri: `${process.env.REACT_APP_GOGGLE_REDIRECT_URL_ENDPOINT}/google`,
+    // redirect_uri: `http://localhost:3000/google`,
+    prompt: "select_account",
+    access_type: "offline",
+    scope,
+  });
+
+  const url = `${googleAuthUrl}?${params}`;
+
+  window.location.href = url;
+}, []);
 
   return (
     <>
@@ -189,7 +209,7 @@ try {
 <div className="mt-8">
   <div className="text-center text-gray-500 text-sm mb-4">OR</div>
   <div className="flex justify-between">
-    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
+    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center" onClick={handleGoogleClick}>
       <FaGoogle className="mr-2" /> Google
     </button>
     <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">

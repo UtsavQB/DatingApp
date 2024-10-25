@@ -29,8 +29,8 @@ const ProfilePage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue, 
-    watch
+    setValue,
+    watch,
   } = useForm();
   const [profilePhoto, setProfilePhoto] = useState(null);
 
@@ -51,7 +51,6 @@ const ProfilePage = () => {
       reader.readAsDataURL(file);
     }
   };
-
 
   const dateOfBirth = watch("dateOfBirth");
 
@@ -100,7 +99,7 @@ const ProfilePage = () => {
                     <FaCamera className="text-gray-500 text-2xl h-10 w-10" />
                   </div>
                 )}
-                <FaEdit className="absolute bottom-2 right-0 text-blue-500 w-5 h-5" />
+                <FaEdit className="absolute bottom-2 right-0 text-gray-500 w-5 h-5" />
               </div>
             </label>
             <input
@@ -200,6 +199,7 @@ const ProfilePage = () => {
               <p className="text-red-500 text-sm mt-1">{errors.age.message}</p>
             )}
           </div>
+          
           <button
             type="submit"
             className="mt-4 w-28 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-lg transition duration-200"

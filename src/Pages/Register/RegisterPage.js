@@ -189,6 +189,7 @@ import Frame from "../../Assets/Icon/Frame.svg";
                 <FiLock className="mt-1" />
               </span>
               <input
+              type="password"
                 {...register("password", { required: "Password is required." })}
                 id="password"
                 className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
