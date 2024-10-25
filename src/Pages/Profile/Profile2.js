@@ -35,12 +35,46 @@ const ProfilePages = () => {
     requestLocation();
   };
 
+  // function getLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(showPosition);
+  //   } else { 
+  //     x.innerHTML = "Geolocation is not supported by this browser.";
+  //   }
+  // }
+  
+  // function showPosition(position) {
+  //   x.innerHTML = "Latitude: " + position.coords.latitude + 
+  //   "<br>Longitude: " + position.coords.longitude;
+  // }
+
+  // const requestLocation = () => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         console.log("Location:", position);
+  //         navigate("/sidebar1"); // Navigate to home page
+  //       },
+  //       (error) => {
+  //         console.error("Error obtaining location:", error);
+  //         setIsBlurred(false); // Remove blur if location access is denied
+  //         alert("Location access denied. Please enable it in your browser settings.");
+  //       }
+  //     );
+  //   } else {
+  //     console.error("Geolocation is not supported by this browser.");
+  //     setIsBlurred(false); // Remove blur if geolocation is not supported
+  //     alert("Geolocation is not supported by this browser.");
+  //   }
+  // };
+
   const requestLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           console.log("Location:", position);
-          navigate("/sidebar1"); // Navigate to home page
+          // Navigate to sidebar1 page
+          navigate("/sidebar1"); 
         },
         (error) => {
           console.error("Error obtaining location:", error);
@@ -54,6 +88,7 @@ const ProfilePages = () => {
       alert("Geolocation is not supported by this browser.");
     }
   };
+  
 
   return (
     <div className={`min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ${isBlurred ? 'backdrop-blur-sm' : ''}`}>

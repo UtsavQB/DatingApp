@@ -99,7 +99,7 @@ const ProfilePage = () => {
                     <FaCamera className="text-gray-500 text-2xl h-10 w-10" />
                   </div>
                 )}
-                <FaEdit className="absolute bottom-2 right-0 text-blue-500 w-5 h-5" />
+                <FaEdit className="absolute bottom-2 right-0 text-gray-500 w-5 h-5" />
               </div>
             </label>
             <input
