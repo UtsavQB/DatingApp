@@ -87,7 +87,6 @@ const handleGoogleClick = useCallback(() => {
     <>
       <div className="min-h-screen bg-pink-100 flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative">
         <div className="hidden md:flex md:w-1/2 items-center justify-center w-full">
-          {/* Background Images */}
           <span className="absolute left-0 bottom-0 z-10 flex items-center pl-0">
             <img src={Landsvg} alt="land" className="h-auto w-full" />
           </span>
@@ -117,7 +116,6 @@ const handleGoogleClick = useCallback(() => {
 
         {/* Main Container */}
         <div className="bg-white md:w-1/2 shadow-lg rounded-lg w-full max-w-md sm:w-full lg:w-1/3 p-4 md:p-8 z-20">
-          {/* Header Section */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-pink-700">Welcome</h1>
             <p className="text-sm text-gray-500">
@@ -126,7 +124,6 @@ const handleGoogleClick = useCallback(() => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Email Field */}
             <div className="mb-6 flex items-center">
           <label className="block text-gray-700 w-24 mr-2" htmlFor="email">
             Email / Username:
@@ -161,7 +158,6 @@ const handleGoogleClick = useCallback(() => {
           </div>
         </div>
 
-            {/* Password Field */}
             <div className="mb-6 flex items-center">
           <label className="block text-gray-700 w-24 mr-2" htmlFor="password">
             Password:
