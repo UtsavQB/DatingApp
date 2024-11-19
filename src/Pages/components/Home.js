@@ -1,94 +1,67 @@
-import React, { useState } from "react";
-import { useSpring, animated } from "react-spring";
-import Sidebar from "../common/Sidebar1";
+import React, { useState, useEffect } from 'react';
+import SwipeableCard from './Setting'; // Adjusted import path to match the card file
+import Sidebar from '../common/Sidebar1';
 
-const SwipeCard = ({ users }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const App = () => {
+  const [cards, setCards] = useState([]); // Initial state to hold cards data
+  const [loading, setLoading] = useState(true); // Loading state to show loading spinner while data is being fetched
+  const [error, setError] = useState(null); // Error state to handle errors
 
-  // Swipe logic with react-spring animation
-  const [styles, set] = useSpring(() => ({
-    x: 0,
-    rotate: 0,
-    scale: 1,
-    config: { tension: 300, friction: 30 },
-  }));
+  // Fetch data from API
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await fetch('https://randomuser.me/api/?results=15'); // Adjust URL to your API
+        // const response = await fetch('http://localhost:5000/api/cardData/getData/670e572bffbbf7b6e667361a'); // Adjust URL to your API
+        const data = await response.json();
+        setCards(data.results); // Assuming the API returns an array under the 'results' field
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to fetch data');
+        setLoading(false);
+      }
+    };
 
-  const handleSwipe = (direction) => {
-    if (direction === "right") {
-      console.log("Liked:", users[currentIndex].name);
-    } else {
-      console.log("Disliked:", users[currentIndex].name);
+    fetchCards();
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
+
+  // Handle swipe action
+  const handleSwipe = (direction, index) => {
+    if (direction === 'right') {
+      console.log(`Card ${index + 1} swiped right!`);
+    } else if (direction === 'left') {
+      console.log(`Card ${index + 1} swiped left!`);
     }
-    
-    // Increment index to show next card
-    setCurrentIndex((prev) => (prev + 1) % users.length);
+
+    // Remove the swiped card from the list
+    setCards(cards.filter((card, cardIndex) => cardIndex !== index));
   };
 
-  const handleDrag = (event) => {
-    const touch = event.changedTouches ? event.changedTouches[0] : event;
-    const offsetX = touch.cliel̥ntX;
-    const offsetY = touch.clientY;
-    const angle = offsetX < window.innerWidth / 2 ? -10 : 10;
-
-    set({
-      x: offsetX - window.innerWidth / 2,
-      rotate: angle,
-      scale: 1 - Math.abs(offsetX) / (window.innerWidth / 4),
-    });
-  };
-
-  const handleDragEnd = () => {
-    const { x } = styles;
-    if (x < -200) {
-      handleSwipe("left");
-    } else if (x > 200) {
-      handleSwipe("right");
-    } else {
-      set({ x: 0, rotate: 0, scale: 1 });
-    }
-  };
+  if (loading) return <div>Loading...</div>; // Display loading state while data is being fetched
+  if (error) return <div>{error}</div>; // Display error if API fetch fails
 
   return (
-    <div className="relative w-full h-screen flex justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-300">
       <div>
-    <Sidebar />
-    </div>
-      {users.length > 0 && (
-        <animated.div
-          {...styles}
-          className="absolute bg-white p-4 rounded-xl shadow-lg w-80 h-96"
-          style={{ zIndex: 10 }}
-          onMouseMove={handleDrag}
-          onMouseUp={handleDragEnd}
-          onTouchMove={handleDrag}
-          onTouchEnd={handleDragEnd}
-        >
-          <img
-            src={users[currentIndex].img}
-            alt={users[currentIndex].name}
-            className="w-full h-3/4 object-cover rounded-xl mb-4"
+        <Sidebar />
+      </div>
+      <div className="relative w-80 h-96">
+        {cards.map((card, index) => (
+          <SwipeableCard
+            key={card.login.uuid} // Using the uuid to uniquely identify the cards
+            content={{
+              name: `${card.name.first} ${card.name.last}`,
+              age: card.dob.age,
+              bio: card.bio || 'No bio available.',
+              image: card.picture.large,
+            }}
+            index={index}
+            onSwipe={handleSwipe}
           />
-          <h3 className="text-xl font-semibold">{users[currentIndex].name}</h3>
-          <p>{users[currentIndex].age} | {users[currentIndex].location}</p>
-        </animated.div>
-      )}
-
-      <div className="absolute flex justify-between w-full px-10 bottom-10">
-        <button
-          className="bg-red-500 text-white p-3 rounded-full"
-          onClick={() => handleSwipe("left")}
-        >
-          Dislike
-        </button>
-        <button
-          className="bg-green-500 text-white p-3 rounded-full"
-          onClick={() => handleSwipe("right")}
-        >
-          Like
-        </button>
+        ))}
       </div>
     </div>
   );
 };
 
-export default SwipeCard;
+export default App;
