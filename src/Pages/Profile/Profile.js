@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-// import { FiUser, FiMail, FiLock } from "react-icons/fi";
+import { Link, Navigate } from "react-router-dom";
+import { FiUser, FiMail, FiLock } from "react-icons/fi";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { FaCamera, FaEdit } from "react-icons/fa";
-// import Select from "react-select";
-// import couple1 from "../../Image/couple1.jpg";
-// import couple2 from "../../Image/couple 2.jpg";
-// import couple3 from "../../Image/couple3.avif";
-// import Slider from "react-slick";
+import Select from "react-select";
+import dategirl from "../../Image/how-to-date-a-girl-1.jpg";
+import coffee from "../../Image/young-asian-couple-dating-coffee-600nw-2274063101.webp";
+import couple from "../../Image/young-beautiful-couple-speaking-smiling-resting-cafe_176420-2284.avif";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import image from "../../Image/01.png";
@@ -34,8 +36,9 @@ const ProfilePage = () => {
   } = useForm();
   const [profilePhoto, setProfilePhoto] = useState(null);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    await fetchData(data);
     // Handle profile update logic here
     // After handling, navigate to the next page
     navigate("/profile2"); // Change '/next-page' to your desired path
@@ -52,6 +55,33 @@ const ProfilePage = () => {
     }
   };
 
+  const getid = localStorage.getItem("id");
+  // console.log(getid,'getid')
+
+  const fetchData = async (data) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/api/userProfile/profile/update/${getid}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log(result, "Response Data");
+       navigate('');
+    } catch (error) {}
+  };
+
+ 
   const dateOfBirth = watch("dateOfBirth");
 
   useEffect(() => {
@@ -103,19 +133,30 @@ const ProfilePage = () => {
               </div>
             </label>
             <input
+               {...register("userImage", {
+                required: "Image is required.",
+              })}
               type="file"
               id="profile-photo"
               accept="image/*"
               onChange={handlePhotoUpload}
               className="hidden"
             />
+               {errors.userImage && (
+              <p className="text-red-500 text-sm absolute top-24">
+                {errors.userImage.message}
+              </p>
+            )}
           </div>
+
+        
+
           <div className="mb-1 items-start">
-            <label className="text-gray-700 mr-3 w-32 flex" htmlFor="firstname">
+            <label className="text-gray-700 mr-3 w-32 flex" htmlFor="userFirstName">
               First Name:
             </label>
             <input
-              {...register("firstname", {
+              {...register("userFirstName", {
                 required: "First Name is required.",
               })}
               id="firstname"
@@ -126,8 +167,10 @@ const ProfilePage = () => {
               }`}
               placeholder="First Name"
             />
-            {errors.firstname && (
-              <p className="text-red-500 text-sm">{errors.firstname.message}</p>
+            {errors.userFirstName && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.userFirstName.message}
+              </p>
             )}
           </div>
           <div className="mb-1 items-center">
@@ -135,7 +178,9 @@ const ProfilePage = () => {
               Last Name:
             </label>
             <input
-              {...register("lastname", { required: "Last Name is required." })}
+              {...register("userLastName", {
+                required: "Last Name is required.",
+              })}
               id="lastname"
               className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
                 errors.lastname
@@ -144,9 +189,9 @@ const ProfilePage = () => {
               }`}
               placeholder="Last Name"
             />
-            {errors.lastname && (
+            {errors.userLastName && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.lastname.message}
+                {errors.userLastName.message}
               </p>
             )}
           </div>
@@ -199,7 +244,94 @@ const ProfilePage = () => {
               <p className="text-red-500 text-sm mt-1">{errors.age.message}</p>
             )}
           </div>
-          
+
+          <div className="mb-4 flex items-center">
+            <label className="block text-gray-700 mr-3 w-24">Gender:</label>
+            <Select
+              options={genderOptions}
+              onChange={(option) => setValue("gender", option?.value)}
+              className={`w-full ${errors.gender ? "border-red-500" : ""}`}
+              placeholder="Select Gender"
+            />
+            {errors.gender && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.gender.message}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-4 flex items-center">
+            <label className="block text-gray-700 mr-3 w-24">
+              Interested Gender:
+            </label>
+            <Select
+              options={genderOptions}
+              onChange={(option) => setValue("interestedGender", option?.value)}
+              className={`w-full ${
+                errors.interestedGender ? "border-red-500" : ""
+              }`}
+              placeholder="Select Interested Gender"
+            />
+
+            {errors.interestedGender && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.interestedGender.message}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-4 flex items-center">
+            <label className="block text-gray-700 mr-3 w-24">
+              Date of Birth:
+            </label>
+            <input
+              type="date"
+              {...register("birthday", {
+                required: "Date of Birth is required.",
+              })}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                errors.dateOfBirth
+                  ? "border-red-500 focus:ring-red-300"
+                  : "focus:ring-pink-200"
+              }`}
+            />
+            {errors.birthday && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.birthday.message}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-4 flex items-center">
+            <label className="block text-gray-700 mr-3 w-24">Hobbies:</label>
+            {/* <Select
+              options={hobbiesOptions}
+              isMulti
+              onChange={(options) => setValue("hobbies", options.map()=>{})}
+              className={`w-full ${errors.hobbies ? "border-red-500" : ""}`}
+              placeholder="Select or create hobbies"
+            /> */}
+
+            <Select
+              options={hobbiesOptions}
+              isMulti
+              onChange={(options) =>
+                setValue(
+                  "hobbies",
+                  options.map((option) => option.value)
+                )
+              }
+              className={`w-full ${errors.hobbies ? "border-red-500" : ""}`}
+              placeholder="Select or create hobbies"
+            />
+
+            {errors.hobbies && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.hobbies.message}
+              </p>
+            )}
+          </div>
+
           <button
             type="submit"
             className="mt-4 w-28 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-lg transition duration-200"

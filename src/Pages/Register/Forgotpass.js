@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import couplesvg from "../../Assets/Icon/couple.svg";
 import Landsvg from "../../Assets/Icon/Land.svg";
 import Buildings from "../../Assets/Icon/Buidings.svg";

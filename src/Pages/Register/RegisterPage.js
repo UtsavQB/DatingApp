@@ -32,6 +32,7 @@ import Frame from "../../Assets/Icon/Frame.svg";
     };
 
     const fetchData = async (formData) => {
+      console.log(formData,'formData')
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/api/users/register`,
@@ -54,6 +55,8 @@ import Frame from "../../Assets/Icon/Frame.svg";
         setMessage(result.message)
         console.log(formData.email, "formData.email");
         localStorage.setItem("Email", formData.email )
+        localStorage.setItem("id", result._id )
+        // console.log(result.id, "formData.id");
         setState({ open: true })
         setTimeout(()=>{
           navigate("/Otp")

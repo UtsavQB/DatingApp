@@ -34,6 +34,9 @@ const Routing = () => {
         <Route exact path="Login" element={<Login />}></Route>
         <Route exact path="Home" element={<Home users={users}/>}></Route>
         <Route exact path="profile" element={<Profile />}></Route>
+        <Route exact path="phoneNumber" element={<Phone />}></Route>
+        <Route exact path='/reset-password/:token' element={<Forgotpass />}></Route>
+        <Route exact path="Forgotpassword" element={<ConfirmEmail />}></Route>
         <Route exact path="Forgotpassword" element={<Forgotpass />}></Route>
         <Route exact path="profile2" element={<Profile2 />}></Route>
         <Route exact path="sidebar" element={<Sidebar />}></Route>
