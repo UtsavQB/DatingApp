@@ -26,7 +26,7 @@ import Frame from "../../Assets/Icon/Frame.svg";
       await fetchData(data);
     };
 
-    const fetchData = async (formData) => {
+    const fetchData = async (data) => {
       try {
         const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/api/auth/reset-password-request`,
@@ -36,7 +36,7 @@ import Frame from "../../Assets/Icon/Frame.svg";
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(data),
         }
       );
   
@@ -48,9 +48,9 @@ import Frame from "../../Assets/Icon/Frame.svg";
         const result = await response.json();
         console.log(result, "Response Data");
         setMessage(result.message)
-        console.log( formData.emailOrUsername , "ConfirmEmail");
+        console.log( data.emailOrUsername , "ConfirmEmail");
 
-        localStorage.setItem("ConfirmEmail", formData.emailOrUsername )
+        localStorage.setItem("ConfirmEmail", data.emailOrUsername )
         setState({ open: true })
         setTimeout(()=>{
         //   navigate("/reset-password/:token")

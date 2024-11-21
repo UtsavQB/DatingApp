@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
@@ -60,11 +60,33 @@ const Login = () => {
     }
   };
 
+const handleGoogleClick = useCallback(() => {
+  const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+  
+  const scope = [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+  ].join(" ");
+
+  const params = new URLSearchParams({
+    response_type: "code",
+    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    redirect_uri: `${process.env.REACT_APP_GOGGLE_REDIRECT_URL_ENDPOINT}/google`,
+    // redirect_uri: `http://localhost:3000/google`,
+    prompt: "select_account",
+    access_type: "offline",
+    scope,
+  });
+
+  const url = `${googleAuthUrl}?${params}`;
+
+  window.location.href = url;
+}, []);
+
   return (
     <>
       <div className="min-h-screen bg-pink-100 flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative">
         <div className="hidden md:flex md:w-1/2 items-center justify-center w-full">
-          {/* Background Images */}
           <span className="absolute left-0 bottom-0 z-10 flex items-center pl-0">
             <img src={Landsvg} alt="land" className="h-auto w-full" />
           </span>
@@ -94,7 +116,6 @@ const Login = () => {
 
         {/* Main Container */}
         <div className="bg-white md:w-1/2 shadow-lg rounded-lg w-full max-w-md sm:w-full lg:w-1/3 p-4 md:p-8 z-20">
-          {/* Header Section */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-pink-700">Welcome</h1>
             <p className="text-sm text-gray-500">
@@ -103,7 +124,6 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Email Field */}
             <div className="mb-6 flex items-center">
               <label className="block text-gray-700 w-24 mr-2" htmlFor="email">
                 Email / Username:
@@ -138,7 +158,6 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Password Field */}
             <div className="mb-6 flex items-center">
               <label
                 className="block text-gray-700 w-24 mr-2"
@@ -191,20 +210,21 @@ const Login = () => {
 
           {/* Social Media Login */}
 
-          <div className="mt-8">
-            <div className="text-center text-gray-500 text-sm mb-4">OR</div>
-            <div className="flex justify-between">
-              <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
-                <FaGoogle className="mr-2" /> Google
-              </button>
-              <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
-                <FaFacebook className="mr-2" /> Facebook
-              </button>
-              <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
-                <FaApple className="mr-2" /> Apple
-              </button>
-            </div>
-          </div>
+<div className="mt-8">
+  <div className="text-center text-gray-500 text-sm mb-4">OR</div>
+  <div className="flex justify-between">
+    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center" onClick={handleGoogleClick}>
+      <FaGoogle className="mr-2" /> Google
+    </button>
+    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
+      <FaFacebook className="mr-2" /> Facebook
+    </button>
+    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded-lg mx-1 flex items-center justify-center">
+      <FaApple className="mr-2" /> Apple
+    </button>
+  </div>
+</div>
+
 
           {/* Register Section */}
           <div className="text-center mt-8">
