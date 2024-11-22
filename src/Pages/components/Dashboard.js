@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SwipeableCard from './Setting'; // Adjusted import path to match the card file
 import Sidebar from '../common/Sidebar1';
+import Spinner from '../common/Spinner'
+// import { FaSpinner } from 'react-icons/fa';
 
 const App = () => {
   const [cards, setCards] = useState([]); // Initial state to hold cards data
@@ -11,7 +13,7 @@ const App = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await fetch('https://randomuser.me/api/?results=15'); // Adjust URL to your API
+        const response = await fetch('https://randomuser.me/api/?results=200'); // Adjust URL to your API
         // const response = await fetch('http://localhost:5000/api/cardData/getData/670e572bffbbf7b6e667361a'); // Adjust URL to your API
         const data = await response.json();
         setCards(data.results); // Assuming the API returns an array under the 'results' field
@@ -23,7 +25,7 @@ const App = () => {
     };
 
     fetchCards();
-  }, []); // Empty dependency array ensures this runs only once when the component mounts
+  }, []);
 
   // Handle swipe action
   const handleSwipe = (direction, index) => {
@@ -37,12 +39,13 @@ const App = () => {
     setCards(cards.filter((card, cardIndex) => cardIndex !== index));
   };
 
-  if (loading) return <div>Loading...</div>; // Display loading state while data is being fetched
+  // if (loading) return <div className='flex justify-center items-center'><FaSpinner /></div>; // Display loading state while data is being fetched
+  if (loading) return <div className='flex justify-center items-center mt-10'><Spinner /></div>; // Display loading state while data is being fetched
   if (error) return <div>{error}</div>; // Display error if API fetch fails
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-300">
-      <div>
+      <div className='w-1/6'>
         <Sidebar />
       </div>
       <div className="relative w-80 h-96">

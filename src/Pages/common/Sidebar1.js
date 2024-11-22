@@ -8,19 +8,22 @@ import {
   FaChevronDown,
   FaChevronUp,
 } from "react-icons/fa"; // Icons
+// import LoveNest from "../../Assets/Icon/Love Nest logo.svg"
+import LoveNest from "../../Assets/Icon/Love Nest.svg"
+import LV from "../../Assets/Icon/LV.svg"
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true); // Sidebar open/close state
-  const [isServicesOpen, setIsServicesOpen] = useState(false); // Services submenu state
-  const location = useLocation(); // To track the active link
+  const [isOpen, setIsOpen] = useState(true);
+  const [isServicesOpen, setIsServicesOpen] = useState(false); 
+  const location = useLocation(); 
 
-  const toggleSidebar = () => setIsOpen(!isOpen); // Toggle sidebar visibility
-  const toggleServices = () => setIsServicesOpen(!isServicesOpen); // Toggle services submenu
+  const toggleSidebar = () => setIsOpen(!isOpen); 
+  const toggleServices = () => setIsServicesOpen(!isServicesOpen); 
 
   // Utility function to add 'active' class to the current route
   const getLinkClass = (path) =>
     location.pathname === path
-      ? "bg-teal-600 text-white"
+      ? "bg-black text-white"
       : "text-black hover:text-white hover:bg-gray-700";
 
   return (
@@ -32,8 +35,11 @@ const Sidebar = () => {
         }`}
       >
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl font-semibold">Love Nest</h2>
+        <div className="flex items-center justify-between mb-4">
+        <span className="relative left-0 top-0 z-0">
+            <img src={LV} alt="lovenest" className="h-20 w-auto " />
+          </span>
+          {/* <h2 className="text-xl font-semibold">Love Nest</h2> */}
           {/* { isOpen &&
            <button
             onClick={toggleSidebar}
@@ -44,12 +50,23 @@ const Sidebar = () => {
         </div>
 
         {/* Sidebar Menu */}
-        <ul className="space-y-2">
+        <ul className="space-y-2 top-12">
           <li>
             <Link
-              to="/Home"
+              to="/dashboard"
               className={`flex items-center py-2 px-3 rounded-md ${getLinkClass(
-                "/Home"
+                "/dashboard"
+              )}`}
+            >
+              <FaHome className="mr-3" />
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/profile"
+              className={`flex items-center py-2 px-3 rounded-md ${getLinkClass(
+                "/profile"
               )}`}
             >
               <FaHome className="mr-3" />
@@ -126,10 +143,10 @@ const Sidebar = () => {
         onClick={toggleSidebar}
         className={
           !isOpen
-            ? ` fixed top-4 left-4 px-2 py-1 bg-black/70 text-white rounded-md shadow-md transform transition-transform duration-1000 ${
+            ? ` fixed top-6 left-4 px-2 py-1 bg-black/70 text-white rounded-md shadow-md transform transition-transform duration-1000 ${
                 isOpen ? "-translate-x-full" : "translate-x-0"
               }`
-            : "fixed top-4 left-52 px-2 py-1 backdrop-blur-md bg-black/60 bg-gray-800 rounded-md text-white"
+            : "fixed top-7 left-52 px-2 py-1 backdrop-blur-md bg-black/60 bg-gray-800 rounded-md text-white"
         }
       >
         ☰

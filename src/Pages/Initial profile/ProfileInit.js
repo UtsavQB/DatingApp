@@ -11,6 +11,22 @@ import { FaCamera, FaEdit } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import image from "../../Image/01.png";
+import { Steps } from "antd";
+
+const steps = [
+  {
+    title: 'First',
+    content: 'First-content',
+  },
+  {
+    title: 'Second',
+    content: 'Second-content',
+  },
+  {
+    title: 'Last',
+    content: 'Last-content',
+  },
+];
 
 const ProfilePage = () => {
   const navigate = useNavigate(); // Create navigate function
@@ -65,6 +81,13 @@ const ProfilePage = () => {
     }
   }, [dateOfBirth, setValue]);
 
+  const [current, setCurrent] = useState(0);
+
+  const items = steps.map((item) => ({
+    key: item.title,
+    title: item.title,
+  }));
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="hidden md:flex md:w-3/5 w-3/5 items-center justify-center h-3/5">
@@ -87,6 +110,7 @@ const ProfilePage = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
+        <Steps current={current} items={items} />
           <div className="flex justify-center mb-4 relative">
             <label htmlFor="profile-photo" className="cursor-pointer">
               <div className="relative w-24 h-24">
@@ -151,28 +175,56 @@ const ProfilePage = () => {
             )}
           </div>
 
-          <div className="mb-1 items-center">
-            <label className="text-gray-700 mr-3 w-24 flex">
+          {/* <div className="mb-1 items-center">
+            <label className="text-gray-700 mr-3 w-24 flex" htmlFor="dob">
               Date of Birth:
             </label>
             <input
+              {...register("dob", { required: "Date of Birth is required." })}
+              id="dob"
               type="date"
-              {...register("dateOfBirth", {
-                required: "Date of Birth is required.",
-              })}
-              max="2100-12-31" // Set a far future max date for visual purposes
               className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                errors.dateOfBirth
+                errors.dob
                   ? "border-red-500 focus:ring-red-300"
                   : "focus:ring-pink-200"
               }`}
+              placeholder="Date of Birth"
             />
-            {errors.dateOfBirth && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.dateOfBirth.message}
-              </p>
+            {errors.dob && (
+              <p className="text-red-500 text-sm mt-1">{errors.dob.message}</p>
             )}
-          </div>
+          </div> */}
+          <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-1 items-center">
+        <label className="text-gray-700 mr-3 w-24 flex" htmlFor="dob">
+          Date of Birth:
+        </label>
+        <input
+          {...register("dob", {
+            required: "Date of Birth is required.",
+            validate: (value) => {
+              // const age = calculateAge(value);
+              // if (age < 18) {
+              //   return "You must be at least 18 years old.";
+              // }
+              return true;
+            }
+          })}
+          id="dob"
+          type="date"
+          className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
+            errors.dob ? "border-red-500 focus:ring-red-300" : "focus:ring-pink-200"
+          }`}
+          placeholder="Date of Birth"
+        />
+        {errors.dob && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.dob.message}
+          </p>
+        )}
+      </div>
+
+    </form>
 
           <div className="mb-1 items-center">
             <label className="text-gray-700 mr-3 w-24 flex">Age:</label>
@@ -199,7 +251,7 @@ const ProfilePage = () => {
               <p className="text-red-500 text-sm mt-1">{errors.age.message}</p>
             )}
           </div>
-          
+
           <button
             type="submit"
             className="mt-4 w-28 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-lg transition duration-200"
