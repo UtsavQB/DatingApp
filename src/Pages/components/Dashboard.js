@@ -13,7 +13,7 @@ const App = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await fetch('https://randomuser.me/api/?results=200'); // Adjust URL to your API
+        const response = await fetch('https://randomuser.me/api/?results=100'); // Adjust URL to your API
         // const response = await fetch('http://localhost:5000/api/cardData/getData/670e572bffbbf7b6e667361a'); // Adjust URL to your API
         const data = await response.json();
         setCards(data.results); // Assuming the API returns an array under the 'results' field

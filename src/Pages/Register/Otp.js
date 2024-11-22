@@ -19,7 +19,7 @@ const OTPVerification = () => {
     formState: { errors },
   } = useForm();
 console.log(errors,"errors")
-  const email = localStorage.getItem("Email");
+  const email = localStorage.getItem("Email"&&"ConfirmEmail");
   // const email = location.state?.email || ""; ` 
   
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -158,7 +158,7 @@ console.log(errors,"errors")
     </span>
     </div>
       
-      <form onSubmit={handleSubmit} 
+      <form onSubmit={handleSubmit(onSubmit)} 
       className="bg-white/50 p-8 bg-opacity-70 rounded-lg shadow-lg w-96 hover:scale-105 transition-transform transform z-10"
       >
       
