@@ -11,6 +11,9 @@ import Profile2 from "../Pages/Profile/Profile2"
 import Sidebar from "../Pages/Register/Sidebar"
 import Sidebar1 from "../Pages/common/Sidebar1"
 import SocialAuth from "../Pages/Register/GoogleLogin";
+import Location from "../Pages/Register/location";
+import ConfirmEmail from "../Pages/Register/ConfirmEmail"
+
 
 const Routing = () => {
   const users = [
@@ -34,7 +37,6 @@ const Routing = () => {
         <Route exact path="Login" element={<Login />}></Route>
         <Route exact path="Home" element={<Home users={users}/>}></Route>
         <Route exact path="profile" element={<Profile />}></Route>
-        <Route exact path="phoneNumber" element={<Phone />}></Route>
         <Route exact path='/reset-password/:token' element={<Forgotpass />}></Route>
         <Route exact path="Forgotpassword" element={<ConfirmEmail />}></Route>
         <Route exact path="Forgotpassword" element={<Forgotpass />}></Route>
@@ -42,6 +44,8 @@ const Routing = () => {
         <Route exact path="sidebar" element={<Sidebar />}></Route>
         <Route exact path="sidebar1" element={<Sidebar1 />}></Route>
         <Route exact path="SocialAuth" element={<SocialAuth />}></Route>
+        <Route exact path="Location" element={<Location />}></Route>   
+
         
       </Routes>
     </BrowserRouter>
