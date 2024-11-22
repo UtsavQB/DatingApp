@@ -297,8 +297,7 @@ const ProfilePage = () => {
             )}
           </div>
 
-<<<<<<<< HEAD:src/Pages/Initial profile/ProfileInit.js
-========
+
           <div className="mb-4 flex items-center">
             <label className="block text-gray-700 mr-3 w-24">Gender:</label>
             <Select
@@ -386,7 +385,7 @@ const ProfilePage = () => {
             )}
           </div>
 
->>>>>>>> main:src/Pages/Profile/Profile.js
+
           <button
             type="submit"
             className="mt-4 w-28 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 rounded-lg transition duration-200"
