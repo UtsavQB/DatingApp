@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-// import { FiUser, FiMail, FiLock } from "react-icons/fi";
+
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { FaCamera, FaEdit } from "react-icons/fa";
-// import Select from "react-select";
-// import couple1 from "../../Image/couple1.jpg";
-// import couple2 from "../../Image/couple 2.jpg";
-// import couple3 from "../../Image/couple3.avif";
-// import Slider from "react-slick";
+import Select from "react-select";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import image from "../../Image/01.png";
@@ -251,6 +249,36 @@ const ProfilePage = () => {
               <p className="text-red-500 text-sm mt-1">{errors.age.message}</p>
             )}
           </div>
+
+
+       
+
+         
+
+          <div className="mb-4 flex items-center">
+            <label className="block text-gray-700 mr-3 w-24">
+              Date of Birth:
+            </label>
+            <input
+              type="date"
+              {...register("birthday", {
+                required: "Date of Birth is required.",
+              })}
+              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
+                errors.dateOfBirth
+                  ? "border-red-500 focus:ring-red-300"
+                  : "focus:ring-pink-200"
+              }`}
+            />
+            {errors.birthday && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.birthday.message}
+              </p>
+            )}
+          </div>
+
+         
+
 
           <button
             type="submit"
