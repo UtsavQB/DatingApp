@@ -14,7 +14,8 @@ const ProfilePage = () => {
 
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [current, setCurrent] = useState(0);
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
+  console.log(current,"current")
+  const { register, handleSubmit, formState: { errors }, setValue} = useForm();
 
   // Handle photo upload
   const handlePhotoUpload = (event) => {
@@ -28,20 +29,19 @@ const ProfilePage = () => {
     }
   };
 
-   // Navigation functions
-   const next = () => {
-    setCurrent(current + 1);
-  };
-
   const prev = () => {
     setCurrent(current - 1);
   };
 
-  // Handle form submit
+  const next = () => {
+    // if (current < steps.length - 1) {
+      setCurrent(current + 1);
+    }
+
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data, "form data");
     // message.success('Profile created successfully!');
-    navigate("/dashboard")
+    navigate("/dashboard");
   };
 
 
@@ -57,9 +57,11 @@ const ProfilePage = () => {
     { value: "gaming", label: "Gaming" },
   ];
 
+
+  
   // Steps content (fields)
   const steps = [
-  
+    
     {
       title: "step 1",
       content: (
@@ -157,7 +159,7 @@ const ProfilePage = () => {
             <label className="text-gray-700 mr-3 w-24 flex">Gender:</label>
             <Select
               options={genderOptions}
-              onChange={(option) => setValue("gender", option)}
+              onChange={(option) => setValue("gender", option?.value)}
               className={`w-full backdrop-blur-md bg-white/40 bg-opacity-10 z-20${errors.gender ? " border-red-500" : ""}`}
               placeholder="Select Gender"
             />
@@ -168,7 +170,7 @@ const ProfilePage = () => {
             <label className="text-gray-700 mr-3 w-full flex">Interested Gender:</label>
             <Select
               options={genderOptions}
-              onChange={(option) => setValue("interestedGender", option)}
+              onChange={(option) => setValue("interestedGender", option?.value)}
               className={`w-full backdrop-blur-md bg-white/40 bg-opacity-10 z-10${errors.interestedGender ? " border-red-500" : ""}`}
               placeholder="Select Interested Gender"
             />
@@ -180,7 +182,7 @@ const ProfilePage = () => {
             <Select
               options={hobbiesOptions}
               isMulti
-              onChange={(options) => setValue("hobbies", options)}
+              onChange={(options) => setValue("hobbies", options?.value)}
               className={`w-full ${errors.hobbies ? "border-red-500" : ""}`}
               placeholder="Select or create hobbies"
             />
@@ -212,15 +214,9 @@ const ProfilePage = () => {
           </p>
         </div>
 
-        <form onClick={handleSubmit(onSubmit)}>
-          {/* <Steps current={current} onChange={setCurrent}>
-            {steps.map((step) => (
-              <Step key={step.title} title={step.title} />
-            ))}
-          </Steps> */}
-
+        <form>
           <div className="steps-content">
-            {steps[current].content}
+            {steps[current]?.content}
           </div>
 
           <div className="flex justify-between mt-4">
@@ -231,11 +227,11 @@ const ProfilePage = () => {
               Previous
             </Button>
             {current < steps.length - 1 ? (
-              <Button type="primary" onClick={next}>
+              <Button type="primary" onClick={handleSubmit(next)}>
                 Next
               </Button>
             ) : (
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" onClick={handleSubmit(onSubmit)}>
                 Submit
               </Button>
             )}
