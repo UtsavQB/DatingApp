@@ -12,6 +12,7 @@ import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
 import Frame from "../../Assets/Icon/Frame.svg";
 // import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data, "data");
     console.log("Login Data:", data);
-    await fetchData({ loginInput: data.email, password: data.password });
+    await fetchData({ loginInput: data.email, password: data.password,message:data?.message });
   };
   // console.log('check')
 
@@ -55,10 +56,12 @@ const Login = () => {
       console.log(result, "Response Data");
       console.log(data.email, "formData.email");
       navigate("/profile");
+
     } catch (error) {
       console.error("Error:", error);
     }
   };
+console.log(message,"data message");
 
 const handleGoogleClick = useCallback(() => {
   const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth";

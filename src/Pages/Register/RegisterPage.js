@@ -53,6 +53,7 @@ import Frame from "../../Assets/Icon/Frame.svg";
         const result = await response.json();
         console.log(result, "Response Data");
         setMessage(result.message)
+        
         console.log(formData.email, "formData.email");
         localStorage.setItem("Email", formData.email )
         localStorage.setItem("id", result._id )
@@ -76,6 +77,7 @@ import Frame from "../../Assets/Icon/Frame.svg";
           open: false,
       });
   };
+  
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r bg-pink-100">
