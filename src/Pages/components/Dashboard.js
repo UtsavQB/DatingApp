@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SwipeableCard from './Setting'; // Adjusted import path to match the card file
 import Sidebar from '../common/Sidebar1';
-import Spinner from '../common/Spinner'
+// import Spinner from '../common/Spinner'
 // import { FaSpinner } from 'react-icons/fa';
 
 const App = () => {
@@ -40,7 +40,7 @@ const App = () => {
   };
 
   // if (loading) return <div className='flex justify-center items-center'><FaSpinner /></div>; // Display loading state while data is being fetched
-  if (loading) return <div className='flex justify-center items-center mt-10'><Spinner /></div>; // Display loading state while data is being fetched
+  // if (loading) return <div className='flex justify-center items-center mt-10'><Spinner /></div>; // Display loading state while data is being fetched
   if (error) return <div>{error}</div>; // Display error if API fetch fails
 
   return (

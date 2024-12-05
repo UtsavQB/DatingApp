@@ -238,7 +238,7 @@ const RegisterPage = () => {
               </p>
             )}
           </div>
-        </div> */}
+        </div>
           <div className="mb-6 flex items-center">
             <label
               className="block text-gray-700 w-24 mr-2"

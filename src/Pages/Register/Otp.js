@@ -94,7 +94,7 @@ console.log(errors,"errors")
       }
       const result = await response.json();
       console.log(result, "Response Data");
-      navigate("/profile");
+      navigate("/step");
     } catch (error) {
       console.error("Error:", error);
     }
