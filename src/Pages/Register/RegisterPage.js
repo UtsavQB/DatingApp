@@ -13,10 +13,11 @@ import Flower2 from "../../Assets/Icon/Flower2.svg";
 import Flower3 from "../../Assets/Icon/Flower3.svg";
 import Frame from "../../Assets/Icon/Frame.svg";
 
+
 const RegisterPage = () => {
   // const [data, setData] = useState();
-  const [message, setMessage] = useState("");
-  console.log("message", message);
+    const [message, setMessage] = useState('')
+    console.log("message",message);
 
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const RegisterPage = () => {
   };
 
   const fetchData = async (formData) => {
-    console.log(formData, "formData");
+      console.log(formData,'formData')
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/api/users/register`,
@@ -51,15 +52,16 @@ const RegisterPage = () => {
 
       const result = await response.json();
       console.log(result, "Response Data");
-      setMessage(result.message);
+        setMessage(result.message)
+        
       console.log(formData.email, "formData.email");
-      localStorage.setItem("Email", formData.email);
-      localStorage.setItem("id", result._id);
+        localStorage.setItem("Email", formData.email )
+        localStorage.setItem("id", result._id )
       // console.log(result.id, "formData.id");
-      setState({ open: true });
-      setTimeout(() => {
-        navigate("/Otp");
-      }, 2000);
+        setState({ open: true })
+        setTimeout(()=>{
+          navigate("/Otp")
+        },2000)  
     } catch (error) {
       console.error("Error:", error);
     }
@@ -67,7 +69,7 @@ const RegisterPage = () => {
   // snakbar
   // const { mutate, isSuccess, isError, error, data: Updated_response, isLoading } = useForm()
   const [state, setState] = useState({
-    open: false,
+      open: false
   });
   const handleClose = () => {
     setState({
@@ -80,6 +82,7 @@ const RegisterPage = () => {
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r bg-pink-100">
       <div className="hidden md:flex md:w-1/2 items-center justify-center w-full">
+
         <span className="absolute left-0 bottom-0 z-10 flex items-center pl-0">
           <img src={Landsvg} alt="land" className="h-auto w-full" />
         </span>
@@ -96,7 +99,7 @@ const RegisterPage = () => {
           <img src={Flower3} alt="flower3" className="h-auto w-full" />
         </span>
         <span className="absolute top-20  flex item-center">
-          <img src={Frame} alt="Frame" className="animate-bounce" />
+            <img src={Frame} alt="Frame" className="animate-bounce"/>
         </span>
         <span className="absolute left-4 md:left-12 lg:left-48 bottom-4 md:bottom-6 lg:bottom-10 z-20 flex items-center pl-2 sm:left-4 xl:left-48 sm:bottom-4 xl:bottom-10 sm:pl-3">
           <img
@@ -108,6 +111,7 @@ const RegisterPage = () => {
       </div>
 
       <div className="z-20 items-center justify-center md:flex md:w-1/2">
+          
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white md:w-1/3 shadow-lg rounded-lg w-full max-w-md sm:w-1/4 lg:w-1/2 p-4 md:p-8 z-20"
@@ -115,6 +119,8 @@ const RegisterPage = () => {
           <h2 className="text-4xl font-semibold mb-6 text-center text-gray-800">
             Register
           </h2>
+
+    
 
           <div className="mb-6 flex items-center">
             <label className="block text-gray-700 w-24 mr-2" htmlFor="username">
@@ -126,9 +132,7 @@ const RegisterPage = () => {
                   <FiUser className="mt-1" />
                 </span>
                 <input
-                  {...register("username", {
-                    required: "Username is required.",
-                  })}
+                {...register("username", { required: "Username is required." })}
                   id="username"
                   className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
                     errors.username
@@ -191,9 +195,7 @@ const RegisterPage = () => {
                 </span>
                 <input
                   type="password"
-                  {...register("password", {
-                    required: "Password is required.",
-                  })}
+                {...register("password", { required: "Password is required." })}
                   id="password"
                   className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
                     errors.password
@@ -210,7 +212,7 @@ const RegisterPage = () => {
               )}
             </div>
           </div>
-          {/* <div className="mb-6 flex items-center">
+    <div className="mb-6 flex items-center">
           <label className="block text-gray-700 w-24 mr-2" htmlFor="confirmPassword">
            Confirm Password:
           </label>
@@ -236,7 +238,7 @@ const RegisterPage = () => {
               </p>
             )}
           </div>
-        </div> */}
+        </div>
           <div className="mb-6 flex items-center">
             <label
               className="block text-gray-700 w-24 mr-2"
