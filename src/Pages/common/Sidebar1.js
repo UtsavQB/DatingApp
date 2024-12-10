@@ -58,9 +58,9 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              to="/Home"
+              to="/ProfilePage"
               className={`flex items-center py-2 px-3 rounded-md ${getLinkClass(
-                "/Home"
+                "/ProfilePage"
               )}`}
             >
               <FaHome className="mr-3" />
@@ -80,7 +80,7 @@ const Sidebar = () => {
           </li>
 
           {/* Services submenu */}
-          <li>
+          {/* <li>
             <button
               onClick={toggleServices}
               className={`flex items-center py-2 px-3 w-full rounded-md ${getLinkClass(
@@ -115,6 +115,17 @@ const Sidebar = () => {
                 </li>
               </ul>
             )}
+          </li> */}
+          <li>
+            <Link
+              to="/service"
+              className={`flex items-center py-2 px-3 rounded-md ${getLinkClass(
+                "/service"
+              )}`}
+            >
+              <FaCogs className="mr-3" />
+              Services
+            </Link>
           </li>
 
           <li>

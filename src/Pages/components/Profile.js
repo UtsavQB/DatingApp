@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Sidebar from "../common/Sidebar1";
 import { useForm } from "react-hook-form";
+import { FaCamera, FaEdit } from "react-icons/fa";
+
 
 const ProfilePage = () => {
   const initialUserData = {
@@ -37,6 +39,19 @@ const ProfilePage = () => {
     console.log("Profile updated:", userData);
   };
 
+  const [profilePhoto, setProfilePhoto] = useState(null);
+
+
+  const handlePhotoUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePhoto(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-1/6">
@@ -48,6 +63,29 @@ const ProfilePage = () => {
         {/* User Information Section */}
         <div className="bg-gray-50 rounded-lg p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">User Information</h2>
+          <div className="flex justify-center mb-4 relative">
+              <label htmlFor="profile-photo" className="cursor-pointer">
+                <div className="relative w-24 h-24">
+                  <img
+                    src={profilePhoto || "https://via.placeholder.com/1"}
+                    className="w-full h-full rounded-full border-2 border-pink-200 object-cover"
+                  />
+                  {profilePhoto === null && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <FaCamera className="text-gray-500 text-2xl h-10 w-10" />
+                    </div>
+                  )}
+                  <FaEdit className="absolute bottom-2 right-0 text-gray-500 w-5 h-5" />
+                </div>
+              </label>
+              <input
+                type="file"
+                id="profile-photo"
+                accept="image/*"
+                onChange={handlePhotoUpload}
+                className="hidden"
+              />
+            </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               First Name
@@ -61,6 +99,21 @@ const ProfilePage = () => {
             />
             {errors.firstname && (
               <p className="text-red-500 text-sm">{errors.firstname.message}</p>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Last Name
+            </label>
+            <input
+              type="last name"
+              name="last name"
+              value={userData.lastname}
+              onChange={handleChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md bg-gray-100"
+            />
+            {errors.lastname && (
+              <p className="text-red-500 text-sm">{errors.lastname.message}</p>
             )}
           </div>
           <div>
