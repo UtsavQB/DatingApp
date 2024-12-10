@@ -221,4 +221,6 @@ const fetchData = async (coordinates) => {
   );
 };
 
+
 export default ProfilePage;
+

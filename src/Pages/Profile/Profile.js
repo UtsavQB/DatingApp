@@ -6,13 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { FaCamera, FaEdit } from "react-icons/fa";
 import Select from "react-select";
-// import dategirl from "../../Image/how-to-date-a-girl-1.jpg";
-// import coffee from "../../Image/young-asian-couple-dating-coffee-600nw-2274063101.webp";
-// import couple from "../../Image/young-beautiful-couple-speaking-smiling-resting-cafe_176420-2284.avif";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-// import background from "../../Image/01.png";
+
 
 const genderOptions = [
   { value: "male", label: "Male" },
@@ -25,6 +19,12 @@ const hobbiesOptions = [
   { value: "traveling", label: "Traveling" },
   { value: "gaming", label: "Gaming" },
 ];
+
+
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import image from "../../Image/01.png";
 
 
 const ProfilePage = () => {
@@ -259,7 +259,7 @@ const ProfilePage = () => {
             )}
           </div>
 
-          <div className="mb-4 flex items-center">
+          {/* <div className="mb-4 flex items-center">
             <label className="block text-gray-700 mr-3 w-24">Gender:</label>
             <Select
               options={genderOptions}
@@ -272,9 +272,9 @@ const ProfilePage = () => {
                 {errors.gender.message}
               </p>
             )}
-          </div>
+          </div> */}
 
-          <div className="mb-4 flex items-center">
+          {/* <div className="mb-4 flex items-center">
             <label className="block text-gray-700 mr-3 w-24">
               Interested Gender:
             </label>
@@ -292,40 +292,12 @@ const ProfilePage = () => {
                 {errors.interestedGender.message}
               </p>
             )}
-          </div>
+          </div> */}
 
-          <div className="mb-4 flex items-center">
-            <label className="block text-gray-700 mr-3 w-24">
-              Date of Birth:
-            </label>
-            <input
-              type="date"
-              {...register("birthday", {
-                required: "Date of Birth is required.",
-              })}
-              className={`border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                errors.dateOfBirth
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-pink-200"
-              }`}
-            />
-            {errors.birthday && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.birthday.message}
-              </p>
-            )}
-          </div>
 
-          <div className="mb-4 flex items-center">
+          {/* <div className="mb-4 flex items-center">
             <label className="block text-gray-700 mr-3 w-24">Hobbies:</label>
-            {/* <Select
-              options={hobbiesOptions}
-              isMulti
-              onChange={(options) => setValue("hobbies", options.map()=>{})}
-              className={`w-full ${errors.hobbies ? "border-red-500" : ""}`}
-              placeholder="Select or create hobbies"
-            /> */}
-
+           
             <Select
               options={hobbiesOptions}
               isMulti
@@ -344,7 +316,7 @@ const ProfilePage = () => {
                 {errors.hobbies.message}
               </p>
             )}
-          </div>
+          </div> */}
 
           <button
             type="submit"
