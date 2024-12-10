@@ -4,7 +4,7 @@ import Sidebar from '../common/Sidebar1';
 // import Spinner from '../common/Spinner'
 // import { FaSpinner } from 'react-icons/fa';
 
-const App = () => {
+const Dashboard = () => {
   const [cards, setCards] = useState([]); // Initial state to hold cards data
   const [loading, setLoading] = useState(true); // Loading state to show loading spinner while data is being fetched
   const [error, setError] = useState(null); // Error state to handle errors
@@ -23,11 +23,11 @@ const App = () => {
         setLoading(false);
       }
     };
-
+      
     fetchCards();
   }, []);
 
-  // Handle swipe action
+  // Handle swipe actionf
   const handleSwipe = (direction, index) => {
     if (direction === 'right') {
       console.log(`Card ${index + 1} swiped right!`);
@@ -67,4 +67,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Dashboard;

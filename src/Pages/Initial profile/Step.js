@@ -11,6 +11,7 @@ const { Step } = Steps;
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  // const [hobbies setHobbies] = useState([])
 
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [current, setCurrent] = useState(0);
@@ -40,7 +41,7 @@ const ProfilePage = () => {
 
   const onSubmit = (data) => {
     console.log(data, "form data");
-    // message.success('Profile created successfully!');
+    fetchData(data)
     navigate("/dashboard");
   };
 
@@ -57,9 +58,31 @@ const ProfilePage = () => {
     { value: "gaming", label: "Gaming" },
   ];
 
-
+const getid = localStorage.getItem('id')
   
-  // Steps content (fields)
+  const fetchData = async (data) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/api/userProfile/profile/update/${getid}`,
+        
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log(result, "Response Data");
+       navigate('');
+    } catch (error) {}
+  };
+
   const steps = [
     
     {

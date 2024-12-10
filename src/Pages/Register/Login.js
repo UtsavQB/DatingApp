@@ -35,7 +35,7 @@ const Login = () => {
     console.log(data, "data fetch data");
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
+        `${process.env.REACT_APP_API_BASE_URL}api/login`,
         {
           method: "POST",
           headers: {
@@ -49,16 +49,14 @@ const Login = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+   
       const result = await response.json();
       console.log(result, "Response Data");
-      console.log(data.email, "formData.email");
+      console.log(data.email, "formData.email");  
       navigate("/profile");
 
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error);  
     }
   };
 console.log(message,"data message");
@@ -105,7 +103,7 @@ const handleGoogleClick = useCallback(() => {
           <span className="absolute right-0 bottom-0 flex items-center">
             <img src={Flower3} alt="flower3" className="h-auto w-full" />
           </span>
-          <span className="absolute top-20 		 flex item-center">
+          <span className="absolute top-20 flex item-center">
             <img src={Frame} alt="Frame" className="animate-bounce" />
           </span>
           <span className="absolute left-4 md:left-12 lg:left-48 bottom-4 md:bottom-6 lg:bottom-10 z-20 flex items-center pl-2 sm:left-4 xl:left-48 sm:bottom-4 xl:bottom-10 sm:pl-3">
@@ -232,7 +230,7 @@ const handleGoogleClick = useCallback(() => {
           {/* Register Section */}
           <div className="text-center mt-8">
             <p className="text-sm text-gray-500">
-              Don’t have an account?{" "}
+              Don’t have an account?
               <Link to="/" className="text-pink-600 hover:underline">
                 Register
               </Link>

@@ -154,7 +154,7 @@ const ProfilePages = () => {
 
         <div className="text-center mt-8">
           <p className="text-sm text-gray-500">
-            Want to go back?{" "}
+            Want to go back?
             <Link to="/profile" className="text-pink-600 hover:underline">Cancel</Link>
           </p>
         </div>

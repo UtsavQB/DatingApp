@@ -19,7 +19,7 @@ const OTPVerification = () => {
     formState: { errors },
   } = useForm();
 console.log(errors,"errors")
-  const email = localStorage.getItem("Email"&&"ConfirmEmail");
+  const email = localStorage.getItem("Email" || "ConfirmEmail");
   // const email = location.state?.email || ""; ` 
   
   const [otp, setOtp] = useState(["", "", "", ""]);

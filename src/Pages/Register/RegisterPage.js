@@ -35,7 +35,7 @@ const RegisterPage = () => {
       console.log(formData,'formData')
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/register`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/register`,
         {
           method: "POST",
           headers: {
@@ -263,7 +263,7 @@ const RegisterPage = () => {
                 </svg>
 
                 <input
-                  {...register("password", {
+                  {...register("confirmPassword", {
                     required: { value: true, message: "Password is required" },
                   })}
                   type="confirmPassword"
