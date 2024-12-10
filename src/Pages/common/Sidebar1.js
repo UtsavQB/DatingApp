@@ -45,6 +45,17 @@ const Sidebar = () => {
 
         {/* Sidebar Menu */}
         <ul className="space-y-2">
+        <li>
+            <Link
+              to="/dashboard"
+              className={`flex items-center py-2 px-3 rounded-md ${getLinkClass(
+                "/dashboard"
+              )}`}
+            >
+              <FaHome className="mr-3" />
+              Dashboard
+            </Link>
+          </li>
           <li>
             <Link
               to="/Home"

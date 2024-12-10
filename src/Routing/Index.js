@@ -13,6 +13,12 @@ import Sidebar1 from "../Pages/common/Sidebar1"
 import SocialAuth from "../Pages/Register/GoogleLogin";
 import Location from "../Pages/Register/location";
 import ConfirmEmail from "../Pages/Register/ConfirmEmail"
+import Dashboard from "../Pages/components/Dashboard";
+
+import ProfileInit from "../Pages/Initial profile/ProfileInit";
+import Step from "../Pages/Initial profile/Step";
+import Prectise from "../Prectise/Prectise"
+
 
 
 const Routing = () => {
@@ -46,6 +52,11 @@ const Routing = () => {
         <Route exact path="sidebar1" element={<Sidebar1 />}></Route>
         <Route exact path="SocialAuth" element={<SocialAuth />}></Route>
         <Route exact path="Location" element={<Location />}></Route>   
+        <Route exact path="step" element={<Step/>}></Route>  
+
+
+        <Route exact path="Prectise" element={<Prectise/>}></Route>   
+
 
         
       </Routes>

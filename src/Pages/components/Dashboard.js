@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import SwipeableCard from './Setting'; // Adjusted import path to match the card file
 import Sidebar from '../common/Sidebar1';
-import Spinner from '../common/Spinner'
+// import Spinner from '../common/Spinner'
 // import { FaSpinner } from 'react-icons/fa';
 
-const App = () => {
+const Dashboard = () => {
   const [cards, setCards] = useState([]); // Initial state to hold cards data
   const [loading, setLoading] = useState(true); // Loading state to show loading spinner while data is being fetched
   const [error, setError] = useState(null); // Error state to handle errors
@@ -23,11 +23,11 @@ const App = () => {
         setLoading(false);
       }
     };
-
+      
     fetchCards();
   }, []);
 
-  // Handle swipe action
+  // Handle swipe actionf
   const handleSwipe = (direction, index) => {
     if (direction === 'right') {
       console.log(`Card ${index + 1} swiped right!`);
@@ -40,7 +40,7 @@ const App = () => {
   };
 
   // if (loading) return <div className='flex justify-center items-center'><FaSpinner /></div>; // Display loading state while data is being fetched
-  if (loading) return <div className='flex justify-center items-center mt-10'><Spinner /></div>; // Display loading state while data is being fetched
+  // if (loading) return <div className='flex justify-center items-center mt-10'><Spinner /></div>; // Display loading state while data is being fetched
   if (error) return <div>{error}</div>; // Display error if API fetch fails
 
   return (
@@ -67,4 +67,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Dashboard;
