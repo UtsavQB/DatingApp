@@ -9,6 +9,7 @@ const { Step } = Steps;
 
 const ProfilePage = () => {
   const initialUserData = {
+    firstName: "John doe",
     email: "admin@gmail.com",
     currentPassword: "",
     newPassword: "",
@@ -202,9 +203,37 @@ const ProfilePage = () => {
         </button>
       </div>
 
+      
+
       <div className="bg-gray-50 rounded-lg p-6 mb-6">
         <h2 className="text-xl font-semibold mb-4">User Information</h2>
         <form onSubmit={handleSave} className="space-y-4">
+        <div>
+            <label className="block text-sm font-medium text-gray-700">
+              First Name
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              value={userData.firstName}
+              onChange={handleUIChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Last Name
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              value={userData.lastName}
+              onChange={handleUIChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email
@@ -249,6 +278,98 @@ const ProfilePage = () => {
                 {errors.interestedGender.message}
               </p>
             )}
+          </div>
+
+          <div className="mb-4 items-center">
+            <label className="text-gray-700 mr-3 w-full flex">
+              Date of Birth:
+            </label>
+            <input
+              {...register("dob", { required: "Date of Birth is required." })}
+              id="dob"
+              type="date"
+              className={`mt-1 w-full p-2 border border-gray-300 rounded-md`}
+              placeholder="Date of Birth"
+            />
+            {errors.dob && <p className="text-red-500 text-sm mt-1">{errors.dob.message}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Job Title
+            </label>
+            <input
+              type="text"
+              name="jobTitle"
+              value={userData.jobTitle}
+              onChange={handleUIChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Height
+            </label>
+            <input
+              type="text"
+              name="height"
+              value={userData.height}
+              onChange={handleUIChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              School Name Or Collage Name
+            </label>
+            <input
+              type="text"
+              name="schoolOrCollageName"
+              value={userData.schoolOrCollageName}
+              onChange={handleUIChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Company Name 
+            </label>
+            <input
+              type="text"
+              name="companyName"
+              value={userData.companyName}
+              onChange={handleUIChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              City Name 
+            </label>
+            <input
+              type="text"
+              name="cityName"
+              value={userData.cityName}
+              onChange={handleUIChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Region 
+            </label>
+            <input
+              type="text"
+              name="region"
+              value={userData.region}
+              onChange={handleUIChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            />
           </div>
         </form>
       </div>
