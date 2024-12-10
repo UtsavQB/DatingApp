@@ -6,13 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { FaCamera, FaEdit } from "react-icons/fa";
 import Select from "react-select";
-// import dategirl from "../../Image/how-to-date-a-girl-1.jpg";
-// import coffee from "../../Image/young-asian-couple-dating-coffee-600nw-2274063101.webp";
-// import couple from "../../Image/young-beautiful-couple-speaking-smiling-resting-cafe_176420-2284.avif";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-// import background from "../../Image/01.png";
+
 
 const genderOptions = [
   { value: "male", label: "Male" },
@@ -30,6 +24,11 @@ const hobbiesOptions = [
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import image from "../../Image/01.png";
+
+
+
+
+
 
 const ProfilePage = () => {
   const navigate = useNavigate(); // Create navigate function
