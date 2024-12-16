@@ -7,6 +7,7 @@ import {
   FaPhoneAlt,
   FaChevronDown,
   FaChevronUp,
+  FaUser,
 } from "react-icons/fa"; // Icons
 
 const Sidebar = () => {
@@ -58,12 +59,12 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              to="/ProfilePage"
+              to="/Profile"
               className={`flex items-center py-2 px-3 rounded-md ${getLinkClass(
-                "/ProfilePage"
+                "/Profile"
               )}`}
             >
-              <FaHome className="mr-3" />
+              <FaUser className="mr-3" />
               Profile
             </Link>
           </li>
@@ -81,6 +82,7 @@ const Sidebar = () => {
 
           {/* Services submenu */}
           {/* <li>
+          <li>
             <button
               onClick={toggleServices}
               className={`flex items-center py-2 px-3 w-full rounded-md ${getLinkClass(

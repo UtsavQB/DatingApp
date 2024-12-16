@@ -26,7 +26,7 @@ const steps = [
   },
 ];
 
-const ProfilePage = () => {
+const ProfileInit = () => {
   const navigate = useNavigate(); // Create navigate function
 
   const settings = {
@@ -292,4 +292,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default ProfileInit;

@@ -10,7 +10,6 @@
 //     const [address, setAddress] = useState("");
 //     const navigate = useNavigate();
 
-
 //     useEffect(
 //         () => {
 //             getLocation()
@@ -90,10 +89,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import image from "../../Image/01.png";
-import Location from "../../Image/location_icon.png";
+import LocationImage from "../../Image/location_icon.png";
 
 
-const ProfilePage = () => {
+const Location = () => {
     const navigate = useNavigate();
     const [locationEnabled, setLocationEnabled] = useState(false);
     const [location, setLocation] = useState(null);
@@ -166,7 +165,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="flex flex-col items-center space-y-10 mb-0">
-                    <img src={Location} alt="Location Icon" className="w-24 h-auto" />
+                    <img src={LocationImage} alt="Location Icon" className="w-24 h-auto" />
                     <h1 className="text-center text-md font-medium text-black">
                         {locationEnabled ? (
                             <>
@@ -195,4 +194,5 @@ const ProfilePage = () => {
     );
 };
 
-export default ProfilePage;
+export default Location;
+

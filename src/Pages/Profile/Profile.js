@@ -1,15 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
-import { FiUser, FiMail, FiLock } from "react-icons/fi";
+// import { Link, Navigate } from "react-router-dom";
+// import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { FaCamera, FaEdit } from "react-icons/fa";
 import Select from "react-select";
 
+
+const genderOptions = [
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
+  { value: "other", label: "Other" },
+];
+
+const hobbiesOptions = [
+  { value: "reading", label: "Reading" },
+  { value: "traveling", label: "Traveling" },
+  { value: "gaming", label: "Gaming" },
+];
+
+
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import image from "../../Image/01.png";
+
 
 const ProfilePage = () => {
   const navigate = useNavigate(); // Create navigate function
@@ -92,15 +108,16 @@ const ProfilePage = () => {
     }
   }, [dateOfBirth, setValue]);
 
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10 relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="hidden md:flex md:w-3/5 w-3/5 items-center justify-center h-3/5">
         <div className="container h-screen">
           <div className="p-4">
-            <img
-              src={image}
+            {/* <img
+              src={background}
               className="w-4/6 h-4/6 object-cover rounded-lg mt-14 animate-slow-bounce"
-            />
+            /> */}
           </div>
         </div>
       </div>

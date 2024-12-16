@@ -9,7 +9,7 @@ import Select from "react-select";
 
 const { Step } = Steps;
 
-const ProfilePage = () => {
+const Stepper = () => {
   const navigate = useNavigate();
 
   const [profilePhoto, setProfilePhoto] = useState(null);
@@ -29,14 +29,22 @@ const ProfilePage = () => {
     }
   };
 
-  const prev = () => {
-    setCurrent(current - 1);
-  };
+  // const prev = () => {
+  //   setCurrent(current - 1);
+  // };
 
-  const next = () => {
-    // if (current < steps.length - 1) {
+  // const next = () => {
+  //   // if (current < steps.length - 1) {
+  //     setCurrent(current + 1);
+  //   }
+
+  const onHandleClick=(params)=>{
+    if(params){
       setCurrent(current + 1);
+    }else{
+      setCurrent(current - 1);
     }
+  }
 
   const onSubmit = (data) => {
     console.log(data, "form data");
@@ -222,12 +230,12 @@ const ProfilePage = () => {
           <div className="flex justify-between mt-4">
             <Button
               style={{ display: current === 0 ? 'none' : 'inline-block' }}
-              onClick={prev}
+              onClick={()=>onHandleClick(false)}
             >
               Previous
             </Button>
             {current < steps.length - 1 ? (
-              <Button type="primary" onClick={handleSubmit(next)}>
+              <Button type="primary" onClick={()=>onHandleClick(true)}>
                 Next
               </Button>
             ) : (
@@ -242,4 +250,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default Stepper;
