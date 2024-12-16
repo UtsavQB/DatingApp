@@ -28,7 +28,7 @@ const Forgotpass = () => {
   const fetchData = async (formData) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/reset-password-request`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/register`,
         {
           method: "POST",
           headers: {

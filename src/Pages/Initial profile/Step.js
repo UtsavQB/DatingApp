@@ -9,9 +9,8 @@ import Select from "react-select";
 
 const { Step } = Steps;
 
-const ProfilePage = () => {
+const Stepper = () => {
   const navigate = useNavigate();
-  // const [hobbies setHobbies] = useState([])
 
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [current, setCurrent] = useState(0);
@@ -30,18 +29,26 @@ const ProfilePage = () => {
     }
   };
 
-  const prev = () => {
-    setCurrent(current - 1);
-  };
+  // const prev = () => {
+  //   setCurrent(current - 1);
+  // };
 
-  const next = () => {
-    // if (current < steps.length - 1) {
+  // const next = () => {
+  //   // if (current < steps.length - 1) {
+  //     setCurrent(current + 1);
+  //   }
+
+  const onHandleClick=(params)=>{
+    if(params){
       setCurrent(current + 1);
+    }else{
+      setCurrent(current - 1);
     }
+  }
 
   const onSubmit = (data) => {
     console.log(data, "form data");
-    fetchData(data)
+    // message.success('Profile created successfully!');
     navigate("/dashboard");
   };
 
@@ -58,31 +65,9 @@ const ProfilePage = () => {
     { value: "gaming", label: "Gaming" },
   ];
 
-const getid = localStorage.getItem('id')
-  
-  const fetchData = async (data) => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/userProfile/profile/update/${getid}`,
-        
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const result = await response.json();
-      console.log(result, "Response Data");
-       navigate('');
-    } catch (error) {}
-  };
 
+  
+  // Steps content (fields)
   const steps = [
     
     {
@@ -245,12 +230,12 @@ const getid = localStorage.getItem('id')
           <div className="flex justify-between mt-4">
             <Button
               style={{ display: current === 0 ? 'none' : 'inline-block' }}
-              onClick={prev}
+              onClick={()=>onHandleClick(false)}
             >
               Previous
             </Button>
             {current < steps.length - 1 ? (
-              <Button type="primary" onClick={handleSubmit(next)}>
+              <Button type="primary" onClick={()=>onHandleClick(true)}>
                 Next
               </Button>
             ) : (
@@ -265,4 +250,4 @@ const getid = localStorage.getItem('id')
   );
 };
 
-export default ProfilePage;
+export default Stepper;

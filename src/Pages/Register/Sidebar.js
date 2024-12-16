@@ -5,7 +5,7 @@ import { Layout, Card, Form, Button } from "antd";
 
 const { Content } = Layout;
 
-const ProfilePage = () => {
+const Sidebar = () => {
   const [selectedKey, setSelectedKey] = useState("sub1");
 
   const {
@@ -139,4 +139,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default Sidebar;
