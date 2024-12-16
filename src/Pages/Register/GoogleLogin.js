@@ -5,7 +5,7 @@ import "./GoogleLogin.css";
 import 'react-toastify/dist/ReactToastify.css';
 const { REACT_APP_GOOGLE_CLIENT_ID, REACT_APP_GOGGLE_REDIRECT_URL_ENDPOINT } = process.env;
 
-const SocialAuth = () => {
+const GoogleLogin = () => {
   const [username, setUsername] = useState(localStorage.getItem('goggleFirstName'));
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -100,4 +100,4 @@ const SocialAuth = () => {
   );
 };
 
-export default SocialAuth;
+export default GoogleLogin;

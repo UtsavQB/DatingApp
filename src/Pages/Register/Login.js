@@ -27,7 +27,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data, "data");
     console.log("Login Data:", data);
-    await fetchData({ loginInput: data.email, password: data.password,message:data?.message });
+    await fetchData({ loginInput: data.email, password: data.password });
   };
   // console.log('check')
 
@@ -35,7 +35,7 @@ const Login = () => {
     console.log(data, "data fetch data");
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}api/login`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/login`,
         {
           method: "POST",
           headers: {
@@ -49,17 +49,17 @@ const Login = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-   
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const result = await response.json();
       console.log(result, "Response Data");
-      console.log(data.email, "formData.email");  
-      navigate("/profile");
-
+      console.log(data.email, "formData.email");
+      navigate("/dashboard");
     } catch (error) {
-      console.error("Error:", error);  
+      console.error("Error:", error);
     }
   };
-console.log(message,"data message");
 
 const handleGoogleClick = useCallback(() => {
   const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth";
@@ -230,7 +230,7 @@ const handleGoogleClick = useCallback(() => {
           {/* Register Section */}
           <div className="text-center mt-8">
             <p className="text-sm text-gray-500">
-              Don’t have an account?
+              Don’t have an account?{" "}
               <Link to="/" className="text-pink-600 hover:underline">
                 Register
               </Link>

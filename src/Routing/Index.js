@@ -2,18 +2,14 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import OTPVerification from "../Pages/Register/Otp";
 import RegisterPage from "../Pages/Register/RegisterPage";
-// import Input from "../components/UIComponent/input";
 import Login from "../Pages/Register/Login";
 // import Home from "../Pages/components/Home";
-// import ProfileInit from "../Pages/Initial profile/ProfileInit";
 import Forgotpass from "../Pages/Register/Forgotpass";
-// import ProfileInit2 from "../Pages/Initial profile/ProfileInit2"
 // import Sidebar from "../Pages/Register/Sidebar"
 import Sidebar1 from "../Pages/common/Sidebar1"
-import SocialAuth from "../Pages/Register/GoogleLogin";
+import GoogleLogin from "../Pages/Register/GoogleLogin";
 import Location from "../Pages/Register/location";
 import ConfirmEmail from "../Pages/Register/ConfirmEmail"
-
 import Dashboard from "../Pages/components/Dashboard"
 import Step from "../Pages/Initial profile/Step"
 import ProfilePage from "../Pages/components/Profile"
@@ -22,11 +18,11 @@ import Contact from "../Pages/components/Contact"
 
 import Dashboard from "../Pages/components/Dashboard";
 
-import ProfileInit from "../Pages/Initial profile/ProfileInit";
 import Step from "../Pages/Initial profile/Step";
 import Prectise from "../Prectise/Prectise"
 
 
+import Profile from "../Pages/components/Profile"
 
 const Routing = () => {
   const users = [
@@ -46,21 +42,16 @@ const Routing = () => {
       <Routes>
         <Route exact path="/" element={<RegisterPage />}></Route>
         <Route exact path="Otp" element={<OTPVerification />}></Route>
-        {/* <Route exact path="Input" element={<Input />}></Route> */}
         <Route exact path="Login" element={<Login />}></Route>
         {/* <Route exact path="Home" element={<Home users={users}/>}></Route> */}
         <Route exact path="dashboard" element={<Dashboard users={users}/>}></Route>
-        {/* <Route exact path="profileInit" element={<ProfileInit />}></Route> */}
-        {/* <Route exact path="profile" element={<Profile />}></Route> */}
+        <Route exact path="Profile" element={<Profile />}></Route>
         {/* <Route exact path='/reset-password/:token' element={<Forgotpass />}></Route> */}
         <Route exact path="Forgotpassword" element={<Forgotpass />}></Route>
-        {/* <Route exact path="profile2" element={<ProfileInit2 />}></Route> */}
         {/* <Route exact path="sidebar" element={<Sidebar />}></Route> */}
         <Route exact path="sidebar1" element={<Sidebar1 />}></Route>
-        <Route exact path="SocialAuth" element={<SocialAuth />}></Route>
+        <Route exact path="SocialAuth" element={<GoogleLogin />}></Route>
         <Route exact path="Location" element={<Location />}></Route>   
-
-        <Route exact path="step" element={<Step />}></Route>   
         <Route exact path="ProfilePage" element={<ProfilePage />}></Route>   
         <Route exact path="about" element={<About />}></Route>   
         <Route exact path="Contact" element={<Contact />}></Route>   
