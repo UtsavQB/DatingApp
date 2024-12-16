@@ -53,7 +53,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen  bg-pink-200">
       <div className="w-full max-w-4xl bg-white rounded-lg shadow-md overflow-hidden md:flex">
         <div className="flex flex-col justify-center p-8 bg-gradient-to-br from-purple-600 to-blue-500 text-white md:w-1/2">
           <h2 className="text-2xl font-bold mb-6">Send us a message</h2>

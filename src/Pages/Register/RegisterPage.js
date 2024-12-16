@@ -12,10 +12,13 @@ import Flower from "../../Assets/Icon/Flower.svg";
 import Flower2 from "../../Assets/Icon/Flower2.svg";
 import Flower3 from "../../Assets/Icon/Flower3.svg";
 import Frame from "../../Assets/Icon/Frame.svg";
+import { Snackbar } from '@mui/material';
+
 
 const RegisterPage = () => {
   // const [data, setData] = useState();
-  const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [message, setMessage] = useState('')
   console.log("message", message);
 
   const navigate = useNavigate();
@@ -31,10 +34,10 @@ const RegisterPage = () => {
   };
 
   const fetchData = async (formData) => {
-    console.log(formData, "formData");
+    console.log(formData, 'formData')
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/register`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/register`,
         {
           method: "POST",
           headers: {
@@ -51,15 +54,17 @@ const RegisterPage = () => {
 
       const result = await response.json();
       console.log(result, "Response Data");
-      setMessage(result.message);
+      setMessage(result.message)
+
       console.log(formData.email, "formData.email");
-      localStorage.setItem("Email", formData.email);
-      localStorage.setItem("id", result._id);
+      localStorage.setItem("Email", formData.email)
+      localStorage.setItem("id", result._id)
       // console.log(result.id, "formData.id");
-      setState({ open: true });
+      setState({ open: true })
+      setIsSuccess(true)
       setTimeout(() => {
-        navigate("/Otp");
-      }, 2000);
+        navigate("/Otp")
+      }, 2000)
     } catch (error) {
       console.error("Error:", error);
     }
@@ -67,7 +72,7 @@ const RegisterPage = () => {
   // snakbar
   // const { mutate, isSuccess, isError, error, data: Updated_response, isLoading } = useForm()
   const [state, setState] = useState({
-    open: false,
+    open: false
   });
   const handleClose = () => {
     setState({
@@ -75,7 +80,23 @@ const RegisterPage = () => {
       open: false,
     });
   };
-  
+  //   const getSnackbarStyle = () => {
+  //     if (response?.data?.message) {
+  //         return {
+  //             backgroundColor: 'red',
+  //             color: 'white',
+  //         };
+  //     }
+  //     if (data?.message) {
+  //         console.log(data?.message, "datamessage")
+  //         return {
+  //             backgroundColor: 'green',
+  //             color: 'white',
+  //         };
+  //     }
+  //     return {};
+  // };
+
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r bg-pink-100">
@@ -116,6 +137,8 @@ const RegisterPage = () => {
             Register
           </h2>
 
+
+
           <div className="mb-6 flex items-center">
             <label className="block text-gray-700 w-24 mr-2" htmlFor="username">
               Username:
@@ -126,15 +149,12 @@ const RegisterPage = () => {
                   <FiUser className="mt-1" />
                 </span>
                 <input
-                  {...register("username", {
-                    required: "Username is required.",
-                  })}
+                  {...register("username", { required: "Username is required." })}
                   id="username"
-                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.username
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
+                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.username
+                    ? "border-red-500 focus:ring-red-300"
+                    : "focus:ring-pink-200"
+                    }`}
                   placeholder="Username"
                 />
               </div>
@@ -164,11 +184,10 @@ const RegisterPage = () => {
                     },
                   })}
                   id="email"
-                  className={`border-0 flex-1 py-3 w-full px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.email
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
+                  className={`border-0 flex-1 py-3 w-full px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.email
+                    ? "border-red-500 focus:ring-red-300"
+                    : "focus:ring-pink-200"
+                    }`}
                   placeholder="example@mail.com"
                 />
               </div>
@@ -191,15 +210,12 @@ const RegisterPage = () => {
                 </span>
                 <input
                   type="password"
-                  {...register("password", {
-                    required: "Password is required.",
-                  })}
+                  {...register("password", { required: "Password is required." })}
                   id="password"
-                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.password
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
+                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.password
+                    ? "border-red-500 focus:ring-red-300"
+                    : "focus:ring-pink-200"
+                    }`}
                   placeholder="********"
                 />
               </div>
@@ -210,56 +226,15 @@ const RegisterPage = () => {
               )}
             </div>
           </div>
-          {/* <div className="mb-6 flex items-center">
-          <label className="block text-gray-700 w-24 mr-2" htmlFor="confirmPassword">
-           Confirm Password:
-          </label>
-          <div className="flex-1">
-            <div className="flex items-center border rounded-lg overflow-hidden">
-              <span className="p-3 text-black rounded-md h-12">
-                <FiLock className="mt-1" />
-              </span>
-              <input
-                {...register("confirmPassword", { required: "confirm Password is required." })}
-                id="confirmPassword"
-                className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                  errors.confirmPassword
-                    ? "border-red-500 focus:ring-red-300"
-                    : "focus:ring-pink-200"
-                }`}
-                placeholder="********"
-              />
-            </div>
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-        </div> */}
           <div className="mb-6 flex items-center">
-            <label
-              className="block text-gray-700 w-24 mr-2"
-              htmlFor="confirmPassword"
-            >
+            <label className="block text-gray-700 w-24 mr-2" htmlFor="confirmPassword">
               Confirm Password:
             </label>
             <div className="flex-1">
               <div className="flex items-center border rounded-lg overflow-hidden">
-                <svg
-                  className="p-3 text-black rounded-md h-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
-                  />
-                </svg>
-
+                <span className="p-3 text-black rounded-md h-12">
+                  <FiLock className="mt-1" />
+                </span>
                 <input
                   {...register("confirmPassword", {
                     required: {
@@ -269,17 +244,18 @@ const RegisterPage = () => {
                   })}
                   type="confirmPassword"
                   id="confirmPassword"
-                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${
-                    errors.confirmPassword
-                      ? "border-red-500 focus:ring-red-300"
-                      : "focus:ring-pink-200"
-                  }`}
-                  placeholder="Confirm password"
+                  className={`border-0 flex-1 w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 transition ${errors.confirmPassword
+                    ? "border-red-500 focus:ring-red-300"
+                    : "focus:ring-pink-200"
+                    }`}
+                  placeholder="********"
                 />
               </div>
-              <p className="text-red-500 text-sm mt-1">
-                {errors?.confirmpassword?.message}
-              </p>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -297,7 +273,22 @@ const RegisterPage = () => {
           </p>
         </form>
       </div>
+      {isSuccess &&
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={state.open}
+          onClose={handleClose}
+          // ContentProps={{
+          //   style: getSnackbarStyle(),
+          // }}
+          TransitionComponent={state.Transition}
+          message={'Register Sucessfull'}
+          key={state?.Transition?.name}
+          autoHideDuration={3000}
+        />
+      }
     </div>
+
   );
 };
 

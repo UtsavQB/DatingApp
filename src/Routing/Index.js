@@ -13,6 +13,11 @@ import ConfirmEmail from "../Pages/Register/ConfirmEmail"
 import Dashboard from "../Pages/components/Dashboard"
 import Step from "../Pages/Initial profile/Step"
 import Profile from "../Pages/components/Profile"
+import ProfilePage from "../Pages/components/Profile"
+import About from "../Pages/components/About"
+import Contact from "../Pages/components/Contact"
+import Snackbar from "../Pages/Register/Snackbar/Snackbar";
+
 
 const Routing = () => {
   const users = [
@@ -43,8 +48,10 @@ const Routing = () => {
         <Route exact path="SocialAuth" element={<GoogleLogin />}></Route>
         <Route exact path="Location" element={<Location />}></Route>   
         <Route exact path="step" element={<Step />}></Route>   
-
-        
+        <Route exact path="ProfilePage" element={<ProfilePage />}></Route>   
+        <Route exact path="about" element={<About />}></Route>   
+        <Route exact path="Contact" element={<Contact />}></Route>   
+        <Route exact path="Snackbar" element={<Snackbar />}></Route>           
       </Routes>
     </BrowserRouter>
   );
